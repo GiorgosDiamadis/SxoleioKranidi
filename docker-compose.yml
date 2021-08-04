@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: ./Server
+      dockerfile: ./Dockerfile
+    container_name: server_container
+    ports:
+      - "5000:5000"
+  client:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    container_name: client_container
+    ports:
+      - "3000:3000"
+  database:
+    image: mariadb
+    restart: always
+    container_name: db_container
+    volumes:
+      - db-data:/var/lib/mysql/
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_ROOT_HOST: ${DB_HOST}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3307"
+
+volumes:
+  db-data:
+
