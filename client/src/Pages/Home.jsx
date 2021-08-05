@@ -34,13 +34,13 @@ export default function Home() {
                 </div>
             </header>
 
-            <section id={"about"} className={"relative py-20"} data-aos={'zoom-in'}>
+            <section id={"about"} className={"relative max-w-6xl mx-auto mt-4"} data-aos={'zoom-in'}>
                 <div className="px-16">
                     <div className="items-center flex flex-wrap">
-                        <div className="w-full md:w-6/12 ml-auto mr-auto px-4">
+                        <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
                             <img src="./images/announcement.jpg" alt="" className="max-w-full rounded-lg shadow-lg"/>
                         </div>
-                        <div className="w-full md:w-6/12 ml-auto mr-auto px-4">
+                        <div className="w-full md:w-7/12 ml-auto mr-auto px-4">
 
                             <h3 className="text-gray-600 font-bold text-4xl text-center mt-6">Kalws orisate</h3>
                             <p className="mt-4 text-lg leading-loose text-gray-500">
@@ -63,18 +63,20 @@ export default function Home() {
             </section>
 
 
-            <section className="latest max-w-7xl mx-auto mt-4" data-aos={'zoom-in'}>
+            <section className="latest max-w-6xl mx-auto mt-4" data-aos={'zoom-in'}>
                 <h1 className={"text-gray-600 font-bold text-3xl text-center mt-6 mb-6"}>Τελευταίες ανακοινώσεις</h1>
+
+                <PostCardFeatured/>
+                <div className="lg:grid lg:grid-cols-2">
+                    <PostCard props={{title:"werwrew",publishedAt:"today",body:"body"}}/>
+                    <PostCard props={{title:"werwrew",publishedAt:"today",body:"body"}}/>
+                </div>
+
                 <div style={{display: "flex", justifyContent: "center"}} className={"mt-5 mb-5"}>
                     <button
                         className="h-10 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">Deite Oles
                         tis anakoinwseis
                     </button>
-                </div>
-                <PostCardFeatured/>
-                <div className="lg:grid lg:grid-cols-2">
-                    <PostCard/>
-                    <PostCard/>
                 </div>
             </section>
             <footer className="center bg-dark">

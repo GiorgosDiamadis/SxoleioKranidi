@@ -23,6 +23,9 @@ function App(props) {
           <Route exact path={"/posts"}>
             <Posts/>
           </Route>
+          <Route exact path={"/posts/create"}>
+              <Posts/>
+          </Route>
       </Switch>
     </Router>
   );

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 module.exports = catchAsync(async (req, res, next) => {
   var auth = req.headers.authorization;
+  console.log("authorization " + auth)
 
   if (auth === null || auth === undefined) {
     res.statusMessage = "Not Authenticated!";
@@ -10,8 +11,7 @@ module.exports = catchAsync(async (req, res, next) => {
     return;
   }
   try {
-    const decodedToken = jwt.verify(auth.split(" ")[1], config.JWT_SECRET);
-    req.body.token = decodedToken;
+    req.body.token = jwt.verify(auth.split(" ")[1], config.JWT_SECRET);
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
       res.statusMessage = "Not Authenticated!";

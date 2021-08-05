@@ -8,8 +8,8 @@ export default function PostCardFeatured() {
     const {user} = useContext(AuthContext);
     return (
         <article
-             className="rounded-xl border:black scale-100 transform transition duration-500 hover:scale-105 hover:bg-blue-100">
-            <div style={{display: "flex", justifyContent: "center"}} className={" absolute "}>
+            className="rounded-xl border:black scale-100 transform transition duration-500 hover:scale-105 hover:bg-blue-200">
+            {user && (<div style={{display: "flex", justifyContent: "center"}} className={" absolute "}>
                 <button
                     className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                     Επεξεργασία
@@ -18,7 +18,9 @@ export default function PostCardFeatured() {
                     className="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
                     Διαγραφή
                 </button>
-            </div>
+            </div>)}
+
+
             <div className="py-6 px-5 lg:flex">
                 <div className="flex-1 lg:mr-8">
                     <img src="./images/announcement.jpg" alt="Blog Post illustration" className="rounded-xl"/>

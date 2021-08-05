@@ -1,7 +1,7 @@
-const mariadb = require("mariadb");
+const mariadb = require("mariadb/callback");
 require('dotenv').config()
 
-const pool = mariadb.createPool({
+const pool = mariadb.createConnection({
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
