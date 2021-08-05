@@ -7,6 +7,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
+import Posts from "./Pages/Posts";
 
 function App(props) {
   return (
@@ -18,6 +19,10 @@ function App(props) {
         <Route exact path="/7e53c9eaf1952647/login">
           <Login />
         </Route>
+
+          <Route exact path={"/posts"}>
+            <Posts/>
+          </Route>
       </Switch>
     </Router>
   );

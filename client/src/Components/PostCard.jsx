@@ -8,7 +8,19 @@ export default function PostCard() {
     const {user} = useContext(AuthContext);
     return (
         <article
-            className="border:black cursor-pointer scale-95 transform transition duration-500 hover:scale-100 hover:bg-blue-200 rounded-xl">
+             className="border:black scale-95 transform transition duration-500 hover:scale-100 hover:bg-blue-100 rounded-xl">
+
+            <div style={{display: "flex", justifyContent: "center"}} className={" absolute"}>
+                <button
+                    className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                    Επεξεργασία
+                </button>
+                <button
+                    className="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
+                    Διαγραφή
+                </button>
+            </div>
+
             <div className="py-6 px-5">
                 <div>
                     <img src="./images/announcement.jpg" alt="Blog Post illustration"
@@ -17,15 +29,6 @@ export default function PostCard() {
 
                 <div className="mt-8 flex flex-col justify-between">
                     <header>
-                        <div className="space-x-2">
-                            <a href="#"
-                               className="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                               style={{fontSize:"10px"}}>Techniques</a>
-
-                            <a href="#"
-                               className="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
-                               style={{fontSize:"10px"}}>Updates</a>
-                        </div>
 
                         <div className="mt-4">
                             <h1 className="text-3xl">
@@ -47,19 +50,13 @@ export default function PostCard() {
                             exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
-
-                        <p className="mt-4">
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur.
-                        </p>
                     </div>
 
                     <footer className="flex justify-between items-center mt-8">
                         <div className="flex items-center text-sm">
-                            <img src="./images/lary-avatar.svg" alt="Lary avatar"/>
+                            <img src="./upp.gif" className={"w-10 h-10"}/>
                             <div className="ml-3">
-                                <h5 className="font-bold">Lary Laracore</h5>
-                                <h6>Mascot at Laracasts</h6>
+                                <h5 className="font-bold">Ο/Η διευθύντης/ια</h5>
                             </div>
                         </div>
 

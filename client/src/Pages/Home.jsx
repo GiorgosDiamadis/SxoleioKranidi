@@ -10,7 +10,7 @@ export default function Home() {
     const {user} = useContext(AuthContext);
     return (
         <div>
-            <header className="showcase text-white" data-aos={"fade-in"}>
+            <header className="showcase text-white" >
                 <section className="services" style={{position: "absolute", zIndex: 1}}>
                     <div className="container grid-4 center">
                         <div className="nav-link">
@@ -28,7 +28,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-                <div className="content" data-aos={'fade-in'}>
+                <div data-aos={"zoom-out"} className="content" >
                     <img src="upp.gif" className="logo" alt=""/>
                     <div className="text-6xl mt-10 leading-tight">1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ</div>
                 </div>

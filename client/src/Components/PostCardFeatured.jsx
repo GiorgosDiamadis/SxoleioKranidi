@@ -8,7 +8,17 @@ export default function PostCardFeatured() {
     const {user} = useContext(AuthContext);
     return (
         <article
-            className="rounded-xl cursor-pointer border:black scale-100 transform transition duration-500 hover:scale-105 hover:bg-blue-200">
+             className="rounded-xl border:black scale-100 transform transition duration-500 hover:scale-105 hover:bg-blue-100">
+            <div style={{display: "flex", justifyContent: "center"}} className={" absolute "}>
+                <button
+                    className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                    Επεξεργασία
+                </button>
+                <button
+                    className="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
+                    Διαγραφή
+                </button>
+            </div>
             <div className="py-6 px-5 lg:flex">
                 <div className="flex-1 lg:mr-8">
                     <img src="./images/announcement.jpg" alt="Blog Post illustration" className="rounded-xl"/>
@@ -17,15 +27,6 @@ export default function PostCardFeatured() {
 
                 <div className="flex-1 flex flex-col justify-between">
                     <header className="mt-8 lg:mt-0">
-                        <div className="space-x-2">
-                            <a href="#"
-                               className="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                               style={{fontSize:"10px"}}>Techniques</a>
-
-                            <a href="#"
-                               className="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
-                               style={{fontSize:"10px"}}>Updates</a>
-                        </div>
 
                         <div className="mt-4">
                             <h1 className="text-3xl">
@@ -45,19 +46,13 @@ export default function PostCardFeatured() {
                             ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
-
-                        <p className="mt-4">
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur.
-                        </p>
                     </div>
 
                     <footer className="flex justify-between items-center mt-8">
                         <div className="flex items-center text-sm">
-                            <img src="./images/lary-avatar.svg" alt="Lary avatar"/>
+                            <img src="./upp.gif" className={"w-10 h-10"}/>
                             <div className="ml-3">
-                                <h5 className="font-bold">Lary Laracore</h5>
-                                <h6>Mascot at Laracasts</h6>
+                                <h5 className="font-bold">Ο/Η διευθύντης/ια</h5>
                             </div>
                         </div>
 
