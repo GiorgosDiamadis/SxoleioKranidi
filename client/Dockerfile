@@ -1,13 +1,5 @@
 FROM node:12.4.0
-
-WORKDIR /app/server
-
-COPY ["package.json","./"]
-
-RUN npm install --production
-
+WORKDIR /usr/app/client
+COPY package.json .
+RUN npm install --quiet
 COPY . .
-
-EXPOSE 3000
-
-CMD ["npm","start"]

@@ -10,5 +10,4 @@ const pool = mariadb.createPool({
     allowPublicKeyRetrieval: true,
     connectionLimit: 5
 })
-
 module.exports = pool;

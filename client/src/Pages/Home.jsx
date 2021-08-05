@@ -10,7 +10,7 @@ export default function Home() {
     const {user} = useContext(AuthContext);
     return (
         <div>
-            <header className="showcase">
+            <header className="showcase text-white" data-aos={"fade-in"}>
                 <section className="services" style={{position: "absolute", zIndex: 1}}>
                     <div className="container grid-4 center">
                         <div className="nav-link">
@@ -35,35 +35,43 @@ export default function Home() {
             </header>
 
             <section id={"about"} className={"relative py-20"} data-aos={'zoom-in'}>
-                <div className="container mx-auto px-4">
+                <div className="px-16">
                     <div className="items-center flex flex-wrap">
-                        <div className="w-full md:w-5/12 ml-auto mr-auto px-4" >
+                        <div className="w-full md:w-6/12 ml-auto mr-auto px-4">
                             <img src="./images/announcement.jpg" alt="" className="max-w-full rounded-lg shadow-lg"/>
                         </div>
-                        <div className="w-full md:w-6/12 ml-auto mr-auto px-4 ">
-                            <div className="md:pr-12">
+                        <div className="w-full md:w-6/12 ml-auto mr-auto px-4">
 
-                                <h3 className="text-4xl uppercase  font-semibold">Welcome</h3>
-                                <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                                    Καλώς ήρθατε στην ιστοσελίδα του Δημοτικού
-                                    Σχολείου Ερμιόνης!!! Οι δάσκαλοι και οι
-                                    μαθητές του Σχολείου μας σας καλωσορίζουν στον ιστότοπό τους. Θα χαρούμε πολύ να σας
-                                    ξεναγήσουμε στο σχολείο μας και στον τόπο μας. Στον διαδικτυακό αυτό τόπο θα βρείτε
-                                    χρήσιμες πληροφορίες για δραστηριότητες και εκδηλώσεις που αφορούν το Σχολείο μας,
-                                    τη
-                                    λειτουργία του καθώς και χρηστικές πληροφορίες για τον τόπο μας, την Ερμιονίδα. Καλή
-                                    σας
-                                    ξενάγηση!!!</p>
+                            <h3 className="text-gray-600 font-bold text-4xl text-center mt-6">Kalws orisate</h3>
+                            <p className="mt-4 text-lg leading-loose text-gray-500">
+                                KEIMENO KALWS ORISMATOS
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias, dicta dolorum
+                                incidunt iure molestiae nam neque numquam provident quam quia quidem sit tempora tenetur
+                                unde vel velit voluptas voluptate? Lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit. Atque in odit voluptates. Nostrum, obcaecati, saepe! Alias assumenda, autem
+                                cumque, expedita, fugiat id inventore ipsa maxime mollitia nihil quia repellat saepe.
+                            </p>
+                            <div style={{display: "flex", justifyContent: "center"}} className={"mt-5"}>
+                                <button
+                                    className="h-10 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">Ksenagisi
+                                </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </section>
 
 
-            <section className="latest bg-light max-w-7xl mx-auto mt-4" data-aos={'zoom-in'}>
-                <h1 className={"text-gray-600 font-bold text-3xl text-center mt-6"}>Τελευταίες ανακοινώσεις</h1>
-                <PostCardFeatured />
+            <section className="latest max-w-7xl mx-auto mt-4" data-aos={'zoom-in'}>
+                <h1 className={"text-gray-600 font-bold text-3xl text-center mt-6 mb-6"}>Τελευταίες ανακοινώσεις</h1>
+                <div style={{display: "flex", justifyContent: "center"}} className={"mt-5 mb-5"}>
+                    <button
+                        className="h-10 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">Deite Oles
+                        tis anakoinwseis
+                    </button>
+                </div>
+                <PostCardFeatured/>
                 <div className="lg:grid lg:grid-cols-2">
                     <PostCard/>
                     <PostCard/>
