@@ -29,8 +29,7 @@ class User {
     }
 
     static async comparePassword(password, userPassword) {
-        const isMatch = await bcrypt.compare(password, userPassword)
-        return isMatch;
+        return await bcrypt.compare(password, userPassword);
     }
 
     async save() {
