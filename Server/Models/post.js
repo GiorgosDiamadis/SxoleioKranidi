@@ -9,10 +9,11 @@ class Post {
         this.body = body;
     }
 
-    static getAll() {
+    static getAll(amount) {
         return new Promise(function (resolve, reject) {
                 db.query(
-                    "SELECT * FROM posts",
+                    `SELECT *
+                     FROM posts ${amount !== undefined ? `LIMIT ${amount}` : ""}`,
                     function (err, rows) {
                         if (rows === undefined) {
                             reject(new Error("Error rows is undefined"));
@@ -32,7 +33,7 @@ class Post {
                       set title='${title}',
                           body='${body}'
                       where post_id = ${post_id}`, function (err, res) {
-                if (err){
+                if (err) {
                     console.log(err)
                 }
                 if (res === undefined)
@@ -62,12 +63,21 @@ class Post {
         )
     }
 
+    getTitle(){
+        return this.title;
+    }
+
+    getBody(){
+        return this.body;
+    }
+
     save() {
         this.publishedAt = Date.now().toString();
+        var that = this;
         return new Promise(function (resolve, reject) {
                 db.query(
                     `insert into posts(title, body, publishedAt)
-                     values ('${this.title}', '${this.body}', '${this.publishedAt}')`,
+                     values ('${that.title}', '${that.body}', '${that.publishedAt}')`,
                     function (err, res) {
                         if (res === undefined) {
                             reject();

@@ -8,25 +8,29 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Posts from "./Pages/Posts";
+import ScrollToTop from "./Hooks/ScrollToTop";
+import CreatePost from "./Pages/CreatePost";
 
-function App(props) {
+function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" >
-            <Home/>
-        </Route>
-        <Route exact path="/7e53c9eaf1952647/login">
-          <Login />
-        </Route>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
 
           <Route exact path={"/posts"}>
-            <Posts/>
+            <Posts />
           </Route>
           <Route exact path={"/posts/create"}>
-              <Posts/>
+            <CreatePost />
           </Route>
-      </Switch>
+        </Switch>
+      </ScrollToTop>
     </Router>
   );
 }

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const axiosClient = axios.create({ baseURL: "http://localhost:8080/" });
+const axiosClient = axios.create({ baseURL: "http://localhost:8080" });
 
 module.exports.postRequest = (URL, payload) => {
   let auth = localStorage.getItem("auth");
@@ -7,6 +7,8 @@ module.exports.postRequest = (URL, payload) => {
   if (auth) {
     token = auth.split(" ")[1];
   }
+
+  console.log(URL);
 
   return axiosClient.post(URL, payload, {
     withCredentials: true,
@@ -25,14 +27,14 @@ module.exports.deleteRequest = (URL, payload) => {
   });
 };
 
-module.exports.getRequest = (URL, payload) => {
-  let auth = localStorage.getItem("auth");
-  let token = null;
-  if (auth) {
-    token = auth.split(" ")[1];
-  }
-  return axiosClient.get(URL, payload, {
-    withCredentials: true,
-    headers: token !== null ? { authorization: `Bearer ${token}` } : {},
-  });
-};
+// module.exports.getRequest = (URL, payload) => {
+//   let auth = localStorage.getItem("auth");
+//   let token = null;
+//   if (auth) {
+//     token = auth.split(" ")[1];
+//   }
+//   return axiosClient.get(URL, {greek:"ασδ"}, {
+//     withCredentials: true,
+//     headers: token !== null ? { authorization: `Bearer ${token}` } : {},
+//   });
+// };
