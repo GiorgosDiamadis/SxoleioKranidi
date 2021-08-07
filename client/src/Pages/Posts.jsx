@@ -4,6 +4,7 @@ import PostCard from "../Components/PostCard";
 import Navbar from "../Components/Navbar";
 import { getRequest, postRequest } from "../RequestController";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 export default function Posts() {
   const { user } = useContext(AuthContext);
@@ -41,12 +42,16 @@ export default function Posts() {
         <div className="lg:grid lg:grid-cols-2">
           {allPosts &&
             allPosts.map((post, i) => (
-              <div data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}>
+              <div
+                key={`anakoinwsi${i}`}
+                data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}
+              >
                 <PostCard props={post} />
               </div>
             ))}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

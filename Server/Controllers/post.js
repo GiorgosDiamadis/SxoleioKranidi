@@ -14,6 +14,13 @@ module.exports.getPosts = catchAsync(async (req, res, next) => {
 
   res.status(200).send(posts);
 });
+module.exports.getPost = catchAsync(async (req, res, next) => {
+  const { post_id } = req.body;
+
+  let post = await Post.get(post_id);
+
+  res.status(200).send(post);
+});
 module.exports.savePost = catchAsync(async (req, res, next) => {
   const error = validationResult(req);
 
@@ -22,9 +29,9 @@ module.exports.savePost = catchAsync(async (req, res, next) => {
     return;
   }
 
-  const { title, body } = req.body;
+  const { title, body, summary } = req.body;
 
-  const newPost = new Post(title, body);
+  const newPost = new Post(title, body, summary);
 
   const rs = await newPost.save();
   res.status(200).send({ rs });

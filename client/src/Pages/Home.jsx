@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router";
 import { AuthContext } from "../useAuth";
 import PostCard from "../Components/PostCard";
-import PostCardFeatured from "../Components/PostCardFeatured";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import { getRequest } from "../RequestController";
+import Footer from "../Components/Footer";
 
 const { postRequest } = require("../RequestController");
 
@@ -14,12 +12,13 @@ export default function Home() {
   const [latestPosts, setLatestPosts] = useState([]);
 
   useEffect(() => {
-    postRequest("posts/delete", { amount: 3 }).then(({ data }) => {
-      // setLatestPosts(data);
-      console.log("data")
-    }).catch((reason)=>{
-      console.log(reason)
-    });
+    postRequest("/posts", { amount: 2 })
+      .then(({ data }) => {
+        setLatestPosts(data);
+      })
+      .catch((reason) => {
+        console.log(reason);
+      });
   }, []);
 
   return (
@@ -34,17 +33,19 @@ export default function Home() {
         </div>
       </header>
 
-      <section id={"about"} className={"relative max-w-6xl mx-auto mt-4"}>
-        <div className="px-16">
+      <section id={"about"} className={"relative max-w-7xl mx-auto mt-4"}>
+        <div className="">
           <div className="items-center flex flex-wrap">
             <div
-              className="w-full md:w-4/12 ml-auto mr-auto px-4"
+              className="w-full md:w-4/12 ml-auto mr-auto"
               data-aos={"fade-right"}
+              style={{ flex: "0.9" }}
             >
               <img
-                src="./images/announcement.jpg"
+                src="./images/233600822_872229023647728_234042590613876335_n.jpg"
                 alt=""
                 className="max-w-full rounded-lg shadow-lg"
+                style={{ width: "510px", height: "400px" }}
               />
             </div>
             <div
@@ -81,21 +82,12 @@ export default function Home() {
         </h1>
 
         <div className="lg:grid lg:grid-cols-2">
-          {latestPosts && latestPosts[0] && (
-            <div data-aos={"fade-up"}>
-              <PostCard props={latestPosts[0]} />
-            </div>
-          )}
-
           {latestPosts &&
-            latestPosts.map(
-              (post, i) =>
-                i > 0 && (
-                  <div data-aos={"fade-up"}>
-                    <PostCard props={latestPosts[i]} />
-                  </div>
-                )
-            )}
+            latestPosts.map((post, i) => (
+              <div key={`anakoinwsi${i}`} data-aos={"fade-up"}>
+                <PostCard props={post} />
+              </div>
+            ))}
         </div>
         <div
           style={{ display: "flex", justifyContent: "center" }}
@@ -106,9 +98,7 @@ export default function Home() {
           </button>
         </div>
       </section>
-      <footer className="center bg-dark">
-        <p>&copy;</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

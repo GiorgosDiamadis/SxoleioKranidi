@@ -10,10 +10,14 @@ module.exports.postRequest = (URL, payload) => {
 
   console.log(URL);
 
-  return axiosClient.post(URL, payload, {
-    withCredentials: true,
-    headers: token !== null ? { authorization: `Bearer ${token}` } : {},
-  });
+  return axiosClient.post(
+    URL,
+    { ...payload },
+    {
+      withCredentials: true,
+      headers: token !== null ? { authorization: `Bearer ${token}` } : {},
+    }
+  );
 };
 module.exports.deleteRequest = (URL, payload) => {
   let auth = localStorage.getItem("auth");

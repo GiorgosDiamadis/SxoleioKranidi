@@ -10,6 +10,7 @@ import Home from "./Pages/Home";
 import Posts from "./Pages/Posts";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import CreatePost from "./Pages/CreatePost";
+import Post from "./Components/Post";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route exact path={"/posts/create"}>
             <CreatePost />
+          </Route>
+          <Route exact path={"/posts/:post_id"}>
+            <Post />
           </Route>
         </Switch>
       </ScrollToTop>
