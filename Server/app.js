@@ -1,9 +1,20 @@
-if(process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
     require("dotenv").config()
 }
 
 const express = require("express");
 const cors = require("cors");
+const fs = require('fs')
+
+var cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+})
+
+
 const fileUpload = require("express-fileupload")
 const {
     getPosts,
@@ -35,22 +46,26 @@ app.post("/user/login", loginValidation, login);
 app.post("/posts", getPosts);
 app.post("/posts/get", getPost);
 // app.post("/posts/create", isAuthenticated, saveValidation, savePost);
-app.post("/posts/create", (req, res, next) => {
+app.post("/posts/create", async (req, res, next) => {
 
     if (req.files === null) {
         return res.status(400).json({msg: 'No file uploaded'});
     }
 
-    const file = req.files.file;
 
-    file.mv(`${__dirname}/${file.name}`, err => {
+
+    const file = req.files.file;
+    const filePath = `${__dirname}/${file.name}`
+    file.mv(filePath, async err => {
         if (err) {
             console.error(err);
             return res.status(500).send(err);
         }
-
-        res.json(file);
+        const result = await cloudinary.uploader.upload(filePath)
+        fs.unlinkSync(filePath)
+        res.json(result);
     });
+
 
 });
 app.post("/posts/delete", isAuthenticated, deletePost);
