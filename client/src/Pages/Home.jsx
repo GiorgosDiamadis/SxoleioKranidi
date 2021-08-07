@@ -14,8 +14,11 @@ export default function Home() {
   const [latestPosts, setLatestPosts] = useState([]);
 
   useEffect(() => {
-    postRequest("/posts", { amount: 3 }).then(({ data }) => {
-      setLatestPosts(data);
+    postRequest("posts/delete", { amount: 3 }).then(({ data }) => {
+      // setLatestPosts(data);
+      console.log("data")
+    }).catch((reason)=>{
+      console.log(reason)
     });
   }, []);
 

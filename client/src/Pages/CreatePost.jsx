@@ -2,7 +2,7 @@ import Navbar from "../Components/Navbar";
 import { Toast } from "primereact/toast";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
-import { Editor } from "primereact/editor";
+// import { Editor } from "primereact/editor";
 import { Button } from "primereact/button";
 import React, { useEffect, useRef, useState } from "react";
 import { postRequest } from "../RequestController";
@@ -59,17 +59,17 @@ export default function CreatePost() {
               </span>
             </div>
             <div className="p-inputgroup">
-              <Editor
-                // headerTemplate={header}
-                style={{ width: "800px" }}
-                value={postData.body}
-                onTextChange={(e) => {
-                  setPostData((prevState) => ({
-                    ...prevState,
-                    body: e.htmlValue,
-                  }));
-                }}
-              />
+              {/*<Editor*/}
+              {/*  // headerTemplate={header}*/}
+              {/*  style={{ width: "800px" }}*/}
+              {/*  value={postData.body}*/}
+              {/*  onTextChange={(e) => {*/}
+              {/*    setPostData((prevState) => ({*/}
+              {/*      ...prevState,*/}
+              {/*      body: e.htmlValue,*/}
+              {/*    }));*/}
+              {/*  }}*/}
+              {/*/>*/}
             </div>
 
             <Button

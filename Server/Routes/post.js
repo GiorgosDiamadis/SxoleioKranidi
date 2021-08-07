@@ -11,7 +11,7 @@ const {
 const { saveValidation } = require("../Middleware/validatePost");
 
 router.route("/").post(getPosts);
-router.route("/create").post(savePost);
+router.route("/create").post(isAuthenticated,savePost);
 router.route("/delete").post(isAuthenticated, deletePost);
 router.route("/update").post(isAuthenticated, saveValidation, updatePost);
 
