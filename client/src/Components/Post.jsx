@@ -14,6 +14,7 @@ export default function Post() {
       postRequest("/posts/get", { post_id: postId })
         .then(({ data }) => {
           setPost(data[0]);
+          console.log(data)
         })
         .catch((reason) => {
           console.log(reason);
@@ -26,12 +27,10 @@ export default function Post() {
       {post && (
         <main className="max-w-6xl mx-auto mt-32 lg:mt-32 space-y-6">
           <article className="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
-            <div className="col-span-4 lg:text-center lg:pt-14 mb-10">
-              <img
-                src="/images/announcement.jpg"
-                alt=""
-                className="rounded-xl"
-              />
+            <div className="col-span-4 lg:text-center lg:pt-14 mb-10" >
+                <div dangerouslySetInnerHTML={{__html: post.imgURL}} className={"rounded-xl"}>
+
+                </div>
 
               <p className="mt-4 block text-gray-400 text-xs">
                 Published <time>{moment(post.publishedAt).fromNow()}</time>

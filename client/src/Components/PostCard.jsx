@@ -26,12 +26,8 @@ export default function PostCard({ props }) {
       )}
 
       <div className="py-6 px-5">
-        <div>
-          <img
-            src="./images/announcement.jpg"
-            alt="Blog Post illustration"
-            className="rounded-xl"
-          />
+         <div dangerouslySetInnerHTML={{__html: props.imgURL}}>
+
         </div>
 
         <div className="flex flex-col justify-between">

@@ -6,18 +6,21 @@ import {Editor, EditorProps} from "primereact/editor";
 import {Button} from "primereact/button";
 import React, {useEffect, Fragment, useRef, useState} from "react";
 import {postRequest} from "../RequestController";
-import {FileUpload} from "primereact/fileupload";
+
+
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 export default function CreatePost() {
     const toast = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
+    let history = useHistory();
+
     const [postData, setPostData] = useState({
         title: "",
         body: "",
         summary: "",
-        image: ""
     });
 
 
@@ -74,18 +77,17 @@ export default function CreatePost() {
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', file);
-        formData.append("title","ηασδθιασδβηνθαξσδιγθαισ")
+        formData.append("title", postData.title)
 
-        formData.append("body","ηασδθιασδβηνθαξσδιγθαισ")
-        formData.append("summary","ηασδθιασδβηνθαξσδιγθαισ")
+        formData.append("body", postData.body)
+        formData.append("summary", postData.summary)
         try {
             const res = await axios.post('http://localhost:8080/posts/create', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
             });
-
-            console.log(res.data)
+            history.push(`/posts/${res.data.rs}`);
 
         } catch (err) {
         }
