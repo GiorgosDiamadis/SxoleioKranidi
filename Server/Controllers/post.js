@@ -83,14 +83,15 @@ module.exports.deletePost = catchAsync(async (req, res, next) => {
 module.exports.updatePost = catchAsync(async (req, res, next) => {
     const error = validationResult(req);
 
-    if (!error.isEmpty()) {
-        res.status(400).send(error);
-        return;
-    }
+    console.log(req.body, req.files)
+    // if (!error.isEmpty()) {
+    //     res.status(400).send(error);
+    //     return;
+    // }
+    //
+    // const {title, body, post_id} = req.body;
 
-    const {title, body, post_id} = req.body;
+    // const rs = await Post.update(title, body, post_id);
 
-    const rs = await Post.update(title, body, post_id);
-
-    res.status(200).send(rs);
+    res.status(200).send("req.body");
 });
