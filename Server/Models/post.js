@@ -1,21 +1,20 @@
 const db = require("../db");
-var {cloudinary} = require("../Cloudinary")
+var {cloudinary} = require("../Cloudinary");
 
 class Post {
-    constructor(title, body, summary, img_url) {
+    constructor(title, body, summary, img_url,public_id) {
         this.title = title;
         this.body = body;
         this.summary = summary;
         this.img_url = img_url;
+        this.public_id = public_id;
     }
 
     static getAll(amount) {
         return new Promise(function (resolve, reject) {
             db.query(
                 `SELECT *
-                 FROM posts ${
-                         amount !== undefined ? `LIMIT ${amount}` : ""
-                 }`,
+                 FROM posts ${amount !== undefined ? `LIMIT ${amount}` : ""}`,
                 function (err, rows) {
                     if (rows === undefined) {
                         reject(new Error("Error rows is undefined"));
@@ -94,10 +93,10 @@ class Post {
         var that = this;
         return new Promise(function (resolve, reject) {
             db.query(
-                `insert into posts(title, body, summary, publishedAt, imgURL)
-                 values ('${that.title}', '${that.body}', '${that.summary}', '${that.publishedAt}', "${that.img_url}")`,
+                `insert into posts(title, body, summary, publishedAt, imgURL,public_id)
+                 values ('${that.title}', '${that.body}', '${that.summary}', '${that.publishedAt}', "${that.img_url}",'${that.public_id}')`,
                 function (err, res) {
-                    if (err) throw err
+                    if (err) throw err;
                     if (res === undefined) {
                         reject();
                     } else {

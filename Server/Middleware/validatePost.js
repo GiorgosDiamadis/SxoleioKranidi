@@ -15,4 +15,11 @@ module.exports.saveValidation = checkSchema({
       options: { min: 1 },
     },
   },
+  summary: {
+    in: ["body"],
+    isLength: {
+      errorMessage: "Η περίληψη είναι κενή!",
+      options: { min: 1 },
+    },
+  },
 });

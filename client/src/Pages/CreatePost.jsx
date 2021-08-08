@@ -1,15 +1,12 @@
-import Navbar from "../Components/Navbar";
 import {Toast} from "primereact/toast";
-import {Card} from "primereact/card";
-import {InputText} from "primereact/inputtext";
-import {Editor, EditorProps} from "primereact/editor";
-import {Button} from "primereact/button";
+import {Editor} from "primereact/editor";
 import React, {useEffect, Fragment, useRef, useState} from "react";
 import {postRequest} from "../RequestController";
-
+import Navbar from "../Components/Navbar";
 
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import Spinner from "../Components/Spinner";
 
 export default function CreatePost() {
     const toast = useRef(null);
@@ -22,38 +19,14 @@ export default function CreatePost() {
         body: "",
         summary: "",
     });
-
-
-    const handleOnClick = () => {
-        setIsLoading(true);
-
-        var data = new FormData();
-        data.append('file', postData.image);
-
-
-        postRequest("/posts/create", data, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        })
-            .then((response) => {
-                setIsLoading(false);
-                console.log(response.data)
-            })
-            .catch((res) => {
-                setIsLoading(false);
-                setErrors(res.response.data.errors);
-            });
-    };
-
     const renderHeader = () => {
         return (
             <>
-                <span className="ql-formats">
-                    <button className="ql-bold" aria-label="Bold"></button>
-                    <button className="ql-italic" aria-label="Italic"></button>
-                    <button className="ql-underline" aria-label="Underline"></button>
-                </span>
+        <span className="ql-formats">
+          <button className="ql-bold" aria-label="Bold"></button>
+          <button className="ql-italic" aria-label="Italic"></button>
+          <button className="ql-underline" aria-label="Underline"></button>
+        </span>
                 <select className="ql-size">
                     <option value="small"></option>
                     <option></option>
@@ -62,123 +35,175 @@ export default function CreatePost() {
                 </select>
             </>
         );
-    }
+    };
 
     const header = renderHeader();
 
-    const [file, setFile] = useState('');
-
-
-    const onChange = e => {
+    const [file, setFile] = useState("");
+    const [fileURL, setFileURL] = useState("#");
+    const onChange = (e) => {
         setFile(e.target.files[0]);
+        setFileURL(URL.createObjectURL(e.target.files[0]));
     };
 
-    const onSubmit = async e => {
+    useEffect(() => {
+        if (errors && errors.length > 0) {
+            showError(errors);
+        }
+    }, [errors]);
+
+    const showError = (errors) => {
+        var errorMessage = "";
+        errors.forEach((error) => {
+            errorMessage += error.msg + " ";
+        });
+        toast.current.show({
+            severity: "error",
+            summary: "Αποτυχία",
+            detail: errorMessage,
+            sticky: true,
+        });
+    };
+
+    const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append("title", postData.title)
+        postData.body = postData.body.replaceAll("'", '"');
+        formData.append("file", file);
+        formData.append("title", postData.title);
 
-        formData.append("body", postData.body)
-        formData.append("summary", postData.summary)
+        formData.append("body", postData.body);
+        formData.append("summary", postData.summary);
+
         try {
-            const res = await axios.post('http://localhost:8080/posts/create', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            });
+            setIsLoading(true);
+            const res = await axios.post(
+                "http://localhost:8080/posts/create",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            setIsLoading(false);
             history.push(`/posts/${res.data.rs}`);
-
         } catch (err) {
+            setIsLoading(false);
+            setErrors(err.response.data.errors);
         }
     };
 
     return (
-        <div>
-            <div
-                className="p-d-flex p-flex-row p-jc-center p-ai-center"
-                style={{height: "100vh"}}
-            >
-                <Toast ref={toast} position={"top-center"}/>
-
-                <Card title="Νέα Ανακοίνωση" id="newPost">
-                    <div className="p-d-flex p-flex-column p-jc-center p-ai-center">
-                        <div className=''>
-                            <input
-                                type='file'
-                                className='custom-file-input'
-                                id='customFile'
-                                onChange={onChange}
-                            />
-                        </div>
-                        <input
-                            type='submit'
-                            value='Upload'
-                            className='btn btn-primary btn-block mt-4'
+        <div style={{height: "100vh"}}>
+            <Toast ref={toast} position={"top-center"}/>
+            <Navbar/>
+            <Spinner props={{isLoading}}/>
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+                <div data-aos={"fade-down"} className="max-w-2xl w-full space-y-8">
+                    <div>
+                        <img
+                            className="mx-auto h-12 w-auto"
+                            src="/upp.gif"
+                            alt="Workflow"
                         />
-
-                        <div className="p-inputgroup p-mb-2 ">
-                          <span className="p-float-label">
-                            <InputText
-
-                                id="title"
-                                tooltip="Εισάγετε τον τίτλο της δημοσίευσης"
-                                tooltipOptions={{position: "top"}}
-                                aria-describedby="title-help"
-                                onChange={(e) => {
-                                    setPostData((prevState) => ({
-                                        ...prevState,
-                                        title: e.target.value,
-                                    }));
-                                }}
-                            />
-                            <label htmlFor="title">Τίτλος</label>
-                          </span>
-                        </div>
-                        <div className="p-inputgroup p-mb-2 ">
-                          <span className="p-float-label">
-                            <InputText
-                                id="summary"
-                                tooltip="Εισάγετε την περίληψη της δημοσίευσης"
-                                tooltipOptions={{position: "top"}}
-                                aria-describedby="summary-help"
-                                onChange={(e) => {
-                                    setPostData((prevState) => ({
-                                        ...prevState,
-                                        summary: e.target.value,
-                                    }));
-                                }}
-                            />
-                            <label htmlFor="summary">Περίληψη</label>
-                          </span>
-                        </div>
-
-
-                        <div className="p-inputgroup">
-                            <Editor
-                                style={{width: "800px"}}
-                                headerTemplate={header}
-                                value={postData.body}
-                                onTextChange={(e) => {
-                                    setPostData((prevState) => ({
-                                        ...prevState,
-                                        body: e.htmlValue,
-                                    }));
-                                    console.log(postData)
-                                }}
-                            />
-                        </div>
-
-                        <Button
-                            label="Δημιουργία"
-                            loading={isLoading}
-                            className="p-mt-6"
-                            onClick={onSubmit}
-                        />
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                            Νέα Ανακοίνωση
+                        </h2>
                     </div>
-                </Card>
+                    <form className="mt-8 space-y-6">
+                        <input type="hidden" name="remember" value="true"/>
+                        <div className="rounded-md shadow-sm -space-y-px">
+                            <div data-aos={"fade-right"} className="mb-3">
+                                <label htmlFor="title" className="sr-only">
+                                    Τίτλος
+                                </label>
+                                <input
+                                    id="title"
+                                    name="title"
+                                    type="text"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Τίτλος"
+                                    onChange={(e) => {
+                                        setPostData((prevState) => ({
+                                            ...prevState,
+                                            title: e.target.value,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div data-aos={"fade-left"} className="mb-3">
+                                <label htmlFor="summary" className="sr-only">
+                                    Περίληψη
+                                </label>
+                                <input
+                                    id="summary"
+                                    name="summary"
+                                    type="text"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Περίληψη"
+                                    onChange={(e) => {
+                                        setPostData((prevState) => ({
+                                            ...prevState,
+                                            summary: e.target.value,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div data-aos={"fade-right"}>
+                                <Editor
+                                    className="mb-3 mt-3"
+                                    headerTemplate={header}
+                                    value={postData.body}
+                                    onTextChange={(e) => {
+                                        setPostData((prevState) => ({
+                                            ...prevState,
+                                            body: e.htmlValue,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div data-aos={"fade-left"} className="mb-3">
+                                <div className="">
+                                    <label
+                                        className="w-64 flex m-auto flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
+                                        <svg
+                                            className="w-8 h-8"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                                        </svg>
+                                        <span className="mt-2 text-base leading-normal">
+                      Επέλεξε εικόνα
+                    </span>
+                                        <input
+                                            type="file"
+                                            className="custom-file-input"
+                                            id="customFile"
+                                            onChange={onChange}
+                                            hidden
+                                        />
+                                        <img id="uploaded" src={fileURL}/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-aos={"fade-up"}>
+                            <button
+                                type="submit"
+                                onClick={onSubmit}
+                                disabled={isLoading}
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 disabled:bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Δημιουργία Ανακοίνωσης
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
     );
 }
