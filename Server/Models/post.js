@@ -14,7 +14,7 @@ class Post {
         return new Promise(function (resolve, reject) {
             db.query(
                 `SELECT *
-                 FROM posts ${amount !== undefined ? `LIMIT ${amount}` : ""}`,
+                 FROM posts ${amount !== undefined ? `order by post_id desc limit ${amount}` : ""}`,
                 function (err, rows) {
                     if (rows === undefined) {
                         reject(new Error("Error rows is undefined"));
@@ -43,14 +43,15 @@ class Post {
         });
     }
 
-    static update(title, body, summary, post_id) {
-        console.log("sdf");
+    static update(title, body, summary,imgURL,public_id, post_id) {
         return new Promise(function (resolve, reject) {
             db.query(
                 `update posts
                  set title='${title}',
                      body='${body}',
-                     summary='${summary}'
+                     summary='${summary}',
+                     imgURL="${imgURL}",
+                     public_id='${public_id}'
                  where post_id = ${post_id}`,
                 function (err, res) {
                     if (err) {

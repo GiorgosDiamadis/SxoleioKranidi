@@ -83,15 +83,36 @@ module.exports.deletePost = catchAsync(async (req, res, next) => {
 module.exports.updatePost = catchAsync(async (req, res, next) => {
     const error = validationResult(req);
 
-    console.log(req.body, req.files)
     // if (!error.isEmpty()) {
     //     res.status(400).send(error);
     //     return;
     // }
     //
-    // const {title, body, post_id} = req.body;
+    console.log(req.body)
+    console.log(req.files)
+    let {title, body, post_id, summary, imgURL, public_id} = req.body;
 
-    // const rs = await Post.update(title, body, post_id);
+    if (req.files !== null) {
+        const file = req.files.file;
+        const filePath = `${__dirname}/${file.name}`;
 
-    res.status(200).send("req.body");
+        await file.mv(filePath);
+
+        const uploadRes = await cloudinary.uploader.upload(filePath);
+        imgURL = cloudinary.image(uploadRes.public_id, {
+            height: 366,
+            width: 600,
+            crop: "scale",
+        });
+        imgURL = [imgURL.slice(0, 4), " class='rounded-xl'", imgURL.slice(4)].join(
+            ""
+        );
+
+        public_id = uploadRes.public_id;
+        await fs.unlinkSync(filePath);
+    }
+
+    const result = await Post.update(title, body, summary, imgURL, public_id, post_id);
+
+    res.status(200).send(result);
 });

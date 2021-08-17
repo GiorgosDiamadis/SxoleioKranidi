@@ -57,6 +57,10 @@ export default function UpdatePost() {
 
         formData.append("body", postData.body);
         formData.append("summary", postData.summary);
+        formData.append("post_id", post.post_id);
+
+        formData.append("imgURL", post.imgURL);
+        formData.append("public_id", post.public_id);
 
         try {
             setIsLoading(true);
@@ -70,7 +74,8 @@ export default function UpdatePost() {
                 }
             );
             setIsLoading(false);
-            // history.push(`/posts/${res.data.rs}`);
+
+            history.push(`/posts/${postId}`);
         } catch (err) {
             setIsLoading(false);
             setErrors(err.response.data.errors);
@@ -119,114 +124,115 @@ export default function UpdatePost() {
             <Toast ref={toast} position={"top-center"}/>
             <Navbar/>
             <Spinner props={{isLoading}}/>
-            {post && (<div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-                <div data-aos={"fade-down"} className="max-w-2xl w-full space-y-8">
-                    <div>
-                        <img
-                            className="mx-auto h-12 w-auto"
-                            src="/upp.gif"
-                            alt="Workflow"
-                        />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                            Επεξεργασία Ανακοίνωσης
-                        </h2>
-                    </div>
-                    <form className="mt-8 space-y-6">
-                        <input type="hidden" name="remember" value="true"/>
-                        <div className="rounded-md shadow-sm -space-y-px">
-                            <div data-aos={"fade-right"} className="mb-3">
-                                <label htmlFor="title" className="sr-only">
+            {post && (
+                <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+                    <div data-aos={"fade-down"} className="max-w-2xl w-full space-y-8">
+                        <div>
+                            <img
+                                className="mx-auto h-12 w-auto"
+                                src="/upp.gif"
+                                alt="Workflow"
+                            />
+                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                                Επεξεργασία Ανακοίνωσης
+                            </h2>
+                        </div>
+                        <form className="mt-8 space-y-6">
+                            <input type="hidden" name="remember" value="true"/>
+                            <div className="rounded-md shadow-sm -space-y-px">
+                                <div data-aos={"fade-right"} className="mb-3">
+                                    <label htmlFor="title" className="sr-only">
 
-                                </label>
-                                <input
-                                    id="title"
-                                    name="title"
-                                    type="text"
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    value={post.title}
-                                    onChange={(e) => {
-                                        setPostData((prevState) => ({
-                                            ...prevState,
-                                            title: e.target.value,
-                                        }));
-                                    }}
-                                />
-                            </div>
-                            <div data-aos={"fade-left"} className="mb-3">
-                                <label htmlFor="summary" className="sr-only">
-                                    Περίληψη
-                                </label>
-                                <input
-                                    id="summary"
-                                    name="summary"
-                                    type="text"
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    value={post.summary}
-                                    onChange={(e) => {
-                                        setPostData((prevState) => ({
-                                            ...prevState,
-                                            summary: e.target.value,
-                                        }));
-                                    }}
-                                />
-                            </div>
-                            <div data-aos={"fade-right"}>
-                                <Editor
-                                    className="mb-3 mt-3"
-                                    headerTemplate={header}
-                                    value={post.body}
-                                    onTextChange={(e) => {
-                                        setPostData((prevState) => ({
-                                            ...prevState,
-                                            body: e.htmlValue,
-                                        }));
-                                    }}
-                                />
-                            </div>
-                            <div data-aos={"fade-left"} className="mb-3">
-                                <div className="">
-                                    <label
-                                        className="w-64 flex m-auto flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
-                                        <svg
-                                            className="w-8 h-8"
-                                            fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path
-                                                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
-                                        </svg>
-                                        <span className="mt-2 text-base leading-normal">
+                                    </label>
+                                    <input
+                                        id="title"
+                                        name="title"
+                                        type="text"
+                                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        value={post.title}
+                                        onChange={(e) => {
+                                            setPostData((prevState) => ({
+                                                ...prevState,
+                                                title: e.target.value,
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                                <div data-aos={"fade-left"} className="mb-3">
+                                    <label htmlFor="summary" className="sr-only">
+                                        Περίληψη
+                                    </label>
+                                    <input
+                                        id="summary"
+                                        name="summary"
+                                        type="text"
+                                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        value={post.summary}
+                                        onChange={(e) => {
+                                            setPostData((prevState) => ({
+                                                ...prevState,
+                                                summary: e.target.value,
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                                <div data-aos={"fade-right"}>
+                                    <Editor
+                                        className="mb-3 mt-3"
+                                        headerTemplate={header}
+                                        value={post.body}
+                                        onTextChange={(e) => {
+                                            setPostData((prevState) => ({
+                                                ...prevState,
+                                                body: e.htmlValue,
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                                <div data-aos={"fade-left"} className="mb-3">
+                                    <div className="">
+                                        <label
+                                            className="w-64 flex m-auto flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
+                                            <svg
+                                                className="w-8 h-8"
+                                                fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                                            </svg>
+                                            <span className="mt-2 text-base leading-normal">
                       Επέλεξε εικόνα
                     </span>
-                                        <input
-                                            type="file"
-                                            className="custom-file-input"
-                                            id="customFile"
-                                            onChange={onChange}
-                                            hidden
-                                        />
-                                        <div dangerouslySetInnerHTML={{__html:post.imgURL}}>
+                                            <input
+                                                type="file"
+                                                className="custom-file-input"
+                                                id="customFile"
+                                                onChange={onChange}
+                                                hidden
+                                            />
+                                            {/*<div dangerouslySetInnerHTML={{__html: post.imgURL}}>*/}
 
-                                        </div>
-                                        <img id="uploaded" src={fileURL}/>
-                                    </label>
+                                            {/*</div>*/}
+                                            <img id="uploaded" src={fileURL}/>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div data-aos={"fade-up"}>
-                            <button
-                                type="submit"
-                                onClick={onSubmit}
-                                disabled={isLoading}
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 disabled:bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            >
-                                Επεξεργασία
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>)}
+                            <div data-aos={"fade-up"}>
+                                <button
+                                    type="submit"
+                                    onClick={onSubmit}
+                                    disabled={isLoading}
+                                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 disabled:bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Επεξεργασία
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>)}
 
         </div>
     )
