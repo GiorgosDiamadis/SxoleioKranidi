@@ -11,7 +11,7 @@ export default function Navbar() {
                 <NavLink props={{name:"Ανακοινώσεις",link:"/posts"}}/>
                 <NavLink props={{name:"Εκδηλώσεις",link:"/"}}/>
                 <NavLink props={{name:"Εκπαδευτικοί",link:"/"}}/>
-                <NavLink props={{name:"Επικοινωνία",link:"/"}}/>
+                <NavLink props={{name:"Επικοινωνία",link:"/contact"}}/>
             </ul>
         </nav>
     );

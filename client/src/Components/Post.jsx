@@ -35,7 +35,7 @@ export default function Post() {
                             </div>
 
                             <p data-aos={"fade"} className="mt-4 block text-gray-400 text-xs">
-                                Published <time>{moment(post.publishedAt).fromNow()}</time>
+                                Δημοσιεύτηκε στις  <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
                             </p>
 
                             <div data-aos={"fade-right"} className="flex items-center lg:justify-center text-sm mt-4">

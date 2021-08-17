@@ -12,6 +12,8 @@ import ScrollToTop from "./Hooks/ScrollToTop";
 import CreatePost from "./Pages/CreatePost";
 import Post from "./Components/Post";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Contact from "./Pages/Contact";
+import UpdatePost from "./Pages/UpdatePost";
 
 function App() {
     return (
@@ -29,8 +31,12 @@ function App() {
                         <Posts/>
                     </Route>
                     <ProtectedRoute exact path={"/posts/create"} component={CreatePost}/>
+                    <ProtectedRoute exact path={"/posts/update/:post_id"} component={UpdatePost}/>
                     <Route exact path={"/posts/:post_id"}>
                         <Post/>
+                    </Route>
+                    <Route exact path={"/contact"}>
+                        <Contact/>
                     </Route>
                 </Switch>
             </ScrollToTop>

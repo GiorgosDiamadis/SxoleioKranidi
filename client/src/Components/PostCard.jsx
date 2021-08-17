@@ -33,10 +33,13 @@ export default function PostCard({props}) {
                         style={{display: "flex", justifyContent: "center"}}
                         className={" absolute"}
                     >
-                        <button
-                            className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
-                            Επεξεργασία
-                        </button>
+                        <Link to={`/posts/update/${props.post_id}`}>
+                            <button
+                                className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                                Επεξεργασία
+                            </button>
+                        </Link>
+
                         <button
                             onClick={deletePost}
                             className="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
