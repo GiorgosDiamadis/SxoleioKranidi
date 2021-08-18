@@ -63,15 +63,15 @@ export default function Home() {
                                 και για εκδηλώσεις και δραστηριότητες που πραγματοποιούνται από
                                 μαθητές και εκπαιδευτικούς.
                             </p>
-                            <div
-                                style={{display: "flex", justifyContent: "center"}}
-                                className={"mt-5"}
-                            >
-                                <button
-                                    className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">
-                                    Το σχολείο μας
-                                </button>
-                            </div>
+                            {/*<div*/}
+                            {/*    style={{display: "flex", justifyContent: "center"}}*/}
+                            {/*    className={"mt-5"}*/}
+                            {/*>*/}
+                            {/*    <button*/}
+                            {/*        className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">*/}
+                            {/*        Το σχολείο μας*/}
+                            {/*    </button>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

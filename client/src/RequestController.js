@@ -1,5 +1,8 @@
 const axios = require("axios");
-const axiosClient = axios.create({ baseURL: "http://localhost:8080" });
+const API = "http://localhost:8080";
+const axiosClient = axios.create({ baseURL: API});
+
+module.exports.API = API;
 
 module.exports.postRequest = (URL, payload, headers = null) => {
   let auth = localStorage.getItem("auth");

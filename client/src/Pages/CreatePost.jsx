@@ -1,7 +1,7 @@
 import {Toast} from "primereact/toast";
 import {Editor} from "primereact/editor";
 import React, {useEffect, Fragment, useRef, useState} from "react";
-import {postRequest} from "../RequestController";
+import {API} from "../RequestController";
 import Navbar from "../Components/Navbar";
 
 import axios from "axios";
@@ -78,7 +78,7 @@ export default function CreatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                "http://localhost:8080/posts/create",
+                `${API}/posts/create`,
                 formData,
                 {
                     headers: {
@@ -100,7 +100,7 @@ export default function CreatePost() {
             <Navbar/>
             <Spinner props={{isLoading}}/>
             <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-                <div data-aos={"fade-down"} className="max-w-2xl w-full space-y-8">
+                <div data-aos={"zoom-out"} className="max-w-2xl w-full space-y-8">
                     <div>
                         <img
                             className="mx-auto h-12 w-auto"
@@ -114,7 +114,7 @@ export default function CreatePost() {
                     <form className="mt-8 space-y-6">
                         <input type="hidden" name="remember" value="true"/>
                         <div className="rounded-md shadow-sm -space-y-px">
-                            <div data-aos={"fade-right"} className="mb-3">
+                            <div data-aos={"zoom-out"} className="mb-3">
                                 <label htmlFor="title" className="sr-only">
                                     Τίτλος
                                 </label>
@@ -132,7 +132,7 @@ export default function CreatePost() {
                                     }}
                                 />
                             </div>
-                            <div data-aos={"fade-left"} className="mb-3">
+                            <div data-aos={"zoom-out"} className="mb-3">
                                 <label htmlFor="summary" className="sr-only">
                                     Περίληψη
                                 </label>
@@ -150,7 +150,7 @@ export default function CreatePost() {
                                     }}
                                 />
                             </div>
-                            <div data-aos={"fade-right"}>
+                            <div data-aos={"zoom-out"}>
                                 <Editor
                                     className="mb-3 mt-3"
                                     headerTemplate={header}
@@ -163,7 +163,7 @@ export default function CreatePost() {
                                     }}
                                 />
                             </div>
-                            <div data-aos={"fade-left"} className="mb-3">
+                            <div data-aos={"zoom-out"} className="mb-3">
                                 <div className="">
                                     <label
                                         className="w-64 flex m-auto flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
@@ -191,7 +191,7 @@ export default function CreatePost() {
                                 </div>
                             </div>
                         </div>
-                        <div data-aos={"fade-up"}>
+                        <div data-aos={"zoom-out"}>
                             <button
                                 type="submit"
                                 onClick={onSubmit}

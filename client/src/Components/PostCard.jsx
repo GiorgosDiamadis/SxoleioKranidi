@@ -81,7 +81,7 @@ export default function PostCard({props}) {
                             <div className="flex items-center text-sm">
                                 <img src="./upp.gif" className={"w-10 h-10"}/>
                                 <div className="ml-3">
-                                    <h5 className="font-bold">1ο Δημοτικο Κρανιδιου</h5>
+                                    <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
                                 </div>
                             </div>
 

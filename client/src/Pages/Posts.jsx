@@ -95,7 +95,7 @@ export default function Posts() {
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Link to={"/posts/create"}>
                             <button
-                                data-aos={"fade-down"}
+                                data-aos={"fade"}
                                 className="h-10 mr-3 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100"
                             >
 
@@ -106,16 +106,16 @@ export default function Posts() {
                     </div>
                 )}
                 <h1
-                    data-aos={"fade-up"}
+                    data-aos={"zoom-out"}
                     className={"text-gray-600 font-bold text-3xl text-center mt-6 mb-6"}
                 >
                     Ανακοινώσεις
                 </h1>
 
-                <h2 className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
-                <div className="lg:grid lg:grid-cols-4 p-mb-5">
-                    <input disabled={true}  name=""/>
-                    <Dropdown value={currentMonth}  onChange={(e) => {
+                <h2 data-aos={"zoom-out"} className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
+                <div data-aos={"zoom-out"} className="lg:grid lg:grid-cols-4 p-mb-5">
+                    <input disabled={true} name=""/>
+                    <Dropdown value={currentMonth} onChange={(e) => {
                         setCurrentMonth(e.value)
                     }} options={monthOptions} optionLabel="name" placeholder="Μήνας"/>
                     <Dropdown onChange={(e) => {
@@ -125,7 +125,11 @@ export default function Posts() {
 
                 </div>
 
-                {Object.keys(allPosts).length > 0 && allPosts[currentYear.name][currentMonth.name].length === 1 && (
+                {Object.keys(allPosts).length > 0 &&
+                allPosts[currentYear.name] &&
+                allPosts[currentYear.name][currentMonth.name] &&
+                allPosts[currentYear.name][currentMonth.name].length === 1 &&
+                (
                     <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
                         <div
                             key={`anakoinwsi${0}`}
@@ -139,7 +143,11 @@ export default function Posts() {
 
                 <div className="lg:grid lg:grid-cols-2">
 
-                    {Object.keys(allPosts).length > 0 && allPosts[currentYear.name][currentMonth.name].length > 1 && allPosts[currentYear.name][currentMonth.name].map((post, k) => (
+                    {Object.keys(allPosts).length > 0 &&
+                    allPosts[currentYear.name] &&
+                    allPosts[currentYear.name][currentMonth.name] &&
+                    allPosts[currentYear.name][currentMonth.name].length > 1 &&
+                    allPosts[currentYear.name][currentMonth.name].map((post, k) => (
 
                         <div
                             key={`anakoinwsi - ${k} - ${currentYear.name} - ${currentMonth.name}`}

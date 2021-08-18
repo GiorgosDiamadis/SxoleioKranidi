@@ -1,5 +1,5 @@
 import {useHistory, useParams} from "react-router-dom";
-import {postRequest} from "../RequestController";
+import {postRequest, API} from "../RequestController";
 import {useEffect, useRef, useState} from "react";
 import Navbar from "../Components/Navbar";
 import {Toast} from "primereact/toast";
@@ -17,11 +17,7 @@ export default function UpdatePost() {
     const [errors, setErrors] = useState([]);
     let history = useHistory();
 
-    const [postData, setPostData] = useState({
-        title: "",
-        body: "",
-        summary: "",
-    });
+    const [postData, setPostData] = useState({});
 
     const onChange = (e) => {
         setFile(e.target.files[0]);
@@ -40,6 +36,7 @@ export default function UpdatePost() {
             sticky: true,
         });
     };
+
 
     useEffect(() => {
         if (errors && errors.length > 0) {
@@ -65,7 +62,7 @@ export default function UpdatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                "http://localhost:8080/posts/update",
+                `${API}/posts/update`,
                 formData,
                 {
                     headers: {
@@ -90,7 +87,6 @@ export default function UpdatePost() {
                 .then(({data}) => {
                     setPost(data[0]);
                     setPostData(data[0])
-                    console.log(data)
                 })
                 .catch((reason) => {
                     console.log(reason);
@@ -124,9 +120,9 @@ export default function UpdatePost() {
             <Toast ref={toast} position={"top-center"}/>
             <Navbar/>
             <Spinner props={{isLoading}}/>
-            {post && (
+            {post && postData && (
                 <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-                    <div data-aos={"fade-down"} className="max-w-2xl w-full space-y-8">
+                    <div data-aos={"zoom-out"} className="max-w-2xl w-full space-y-8">
                         <div>
                             <img
                                 className="mx-auto h-12 w-auto"
@@ -140,7 +136,7 @@ export default function UpdatePost() {
                         <form className="mt-8 space-y-6">
                             <input type="hidden" name="remember" value="true"/>
                             <div className="rounded-md shadow-sm -space-y-px">
-                                <div data-aos={"fade-right"} className="mb-3">
+                                <div data-aos={"zoom-out"} className="mb-3">
                                     <label htmlFor="title" className="sr-only">
 
                                     </label>
@@ -149,7 +145,7 @@ export default function UpdatePost() {
                                         name="title"
                                         type="text"
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        value={post.title}
+                                        value={postData.title}
                                         onChange={(e) => {
                                             setPostData((prevState) => ({
                                                 ...prevState,
@@ -158,7 +154,7 @@ export default function UpdatePost() {
                                         }}
                                     />
                                 </div>
-                                <div data-aos={"fade-left"} className="mb-3">
+                                <div data-aos={"zoom-out"} className="mb-3">
                                     <label htmlFor="summary" className="sr-only">
                                         Περίληψη
                                     </label>
@@ -167,7 +163,7 @@ export default function UpdatePost() {
                                         name="summary"
                                         type="text"
                                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                        value={post.summary}
+                                        value={postData.summary}
                                         onChange={(e) => {
                                             setPostData((prevState) => ({
                                                 ...prevState,
@@ -176,11 +172,11 @@ export default function UpdatePost() {
                                         }}
                                     />
                                 </div>
-                                <div data-aos={"fade-right"}>
+                                <div data-aos={"zoom-out"}>
                                     <Editor
                                         className="mb-3 mt-3"
                                         headerTemplate={header}
-                                        value={post.body}
+                                        value={postData.body}
                                         onTextChange={(e) => {
                                             setPostData((prevState) => ({
                                                 ...prevState,
@@ -189,7 +185,7 @@ export default function UpdatePost() {
                                         }}
                                     />
                                 </div>
-                                <div data-aos={"fade-left"} className="mb-3">
+                                <div data-aos={"zoom-out"} className="mb-3">
                                     <div className="">
                                         <label
                                             className="w-64 flex m-auto flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
@@ -220,7 +216,7 @@ export default function UpdatePost() {
                                     </div>
                                 </div>
                             </div>
-                            <div data-aos={"fade-up"}>
+                            <div data-aos={"zoom-out"}>
                                 <button
                                     type="submit"
                                     onClick={onSubmit}
