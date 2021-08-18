@@ -62,7 +62,7 @@ export default function UpdatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `http://localhost:8080/posts/update`,
+                `https://194.63.239.197:8080/posts/update`,
                 formData,
                 {
                     headers: {

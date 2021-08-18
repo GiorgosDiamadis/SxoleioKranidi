@@ -10,3 +10,4 @@ const pool = mariadb.createConnection({
   allowPublicKeyRetrieval: true,
 });
 module.exports = pool;
+

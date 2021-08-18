@@ -77,7 +77,7 @@ export default function CreatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `http://localhost:8080/posts/create`,
+                `https://194.63.239.197:8080/posts/create`,
                 formData,
                 {
                     headers: {
