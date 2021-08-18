@@ -8,142 +8,89 @@ export default function Contact() {
     const [show1, setShow1] = useState();
     const [show2, setShow2] = useState();
     return (
-        <>
+        <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
-            <div className="flex items-center justify-center py-8 px-4 mt-32">
-                <div className="md:w-96 rounded-md shadow-lg py-800 4 px-5 w-full dark:bg-gray- bg-white">
-                    <h2 className="text-xs leading-3 text-gray-600 dark:text-gray-100">Tasks</h2>
-                    <h1 className="text-lg font-bold text-gray-800 leading-5 pt-2">25th January, Monday</h1>
-                    <div className="pt-6 relative">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="w-2 h-2 rounded-full bg-purple-400"/>
-                                <span className="text-purple-400 text-xs italic font-normal pl-1">11:30 AM</span>
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setShow(!show)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={4} viewBox="0 0 16 4"
-                                     fill="none">
-                                    <path
-                                        d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                </svg>
-                                <div className="absolute z-40 right-0">
-                                    <div className="rounded bg-white shadow-xl">
-                                        {show && (
-                                            <ul className=" mt-1">
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
-                                            </ul>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
+            <h3 data-aos={"zoom-out"} className=" mt-32 font-bold text-5xl text-center">
+                Επικοινωνία
+            </h3>
+            <div style={{boxShadow: "0 20px 30px rgba(0, 0, 0, 0.35)"}}
+                 data-aos={"zoom-out"}
+                 className={"flex mt-4 m-auto justify-center  rounded-2xl p-6"}>
+
+                <div>
+                    <iframe
+                        className={"border-2  border-gray-500 block"}
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1885.1895156642377!2d23.161638291035903!3d37.37804848143678!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x55f504576236190e!2zMc6_IM6UzrfOvM6_z4TOuc66z4wgzqPPh86_zrvOtc6vzr8gzprPgc6xzr3Ouc60zq_Ov8-F!5e0!3m2!1sel!2sgr!4v1629306649084!5m2!1sel!2sgr"
+                        width="600" height="450" allowFullScreen="" loading="lazy">
+
+                    </iframe>
+                    <div className={"flex"}>
+                        <div className={"mr-6"}>
+                            <i className="fas fa-phone-volume text-3xl"></i>
+                            <p className={"inline-block text-xl ml-2"}>2754021478</p>
                         </div>
-                        <p className="text-sm leading-none pt-2 text-gray-600 dark:text-gray-100">Meeting with stake
-                            holders</p>
-                        <p className="text-xs italic pt-1 leading-3 text-gray-400">Discussion on the template design</p>
-                        <div className="flex items-center justify-left">
-                            <div
-                                className="text-green-500 bg-green-200 py-1 px-2 rounded text-xs leading-3 mt-2">Completed
-                            </div>
+                        <div className={"mr-6"}>
+                            <i className="fas fa-envelope text-3xl"></i>
+                            <p className={"inline-block text-xl ml-2"}>1dimkra@arg.sch.gr</p>
                         </div>
-                    </div>
-                    <div className="pt-6 relative">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="w-2 h-2 rounded-full bg-blue-400"/>
-                                <span className="text-blue-400 text-xs italic font-normal pl-1">1:00 AM</span>
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setShow1(!show1)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={4} viewBox="0 0 16 4"
-                                     fill="none">
-                                    <path
-                                        d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                </svg>
-                                <div className="absolute z-40 right-0">
-                                    <div className="rounded bg-white shadow-xl">
-                                        {show1 && (
-                                            <ul className=" mt-1">
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
-                                            </ul>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p className="text-sm leading-none pt-2 text-gray-600 dark:text-gray-100">Design spring
-                            discussion</p>
-                        <p className="text-xs italic pt-1 leading-3 text-gray-400">Plan next weeks design sprint</p>
-                        <div className="flex items-center justify-left">
-                            <div className="text-red-500 bg-red-200 py-1 px-2 rounded text-xs leading-3 mt-2">Pending
-                            </div>
-                        </div>
-                    </div>
-                    <div className="pt-6 relative">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <div className="w-2 h-2 rounded-full bg-pink-400"/>
-                                <span className="text-pink-400 text-xs italic font-normal pl-1">2:30 PM</span>
-                            </div>
-                            <div className="cursor-pointer" onClick={() => setShow2(!show2)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={4} viewBox="0 0 16 4"
-                                     fill="none">
-                                    <path
-                                        d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                    <path
-                                        d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z"
-                                        stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round"
-                                        strokeLinejoin="round"/>
-                                </svg>
-                                <div className="absolute z-40 right-0">
-                                    <div className="rounded bg-white shadow-xl">
-                                        {show2 && (
-                                            <ul className=" mt-1">
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
-                                                <li className="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
-                                            </ul>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p className="text-sm leading-none pt-2 text-gray-600 dark:text-gray-100">Finalise marketing
-                            plan</p>
-                        <p className="text-xs italic pt-1 leading-3 text-gray-400">Define channels for content</p>
-                        <div className="flex items-center justify-left">
-                            <div className="text-red-500 bg-red-200 py-1 px-2 rounded text-xs leading-3 mt-2">Pending
-                            </div>
+                        <div>
+                            <i className="fas fa-fax text-3xl"></i>
+                            <p className={"inline-block text-xl ml-2"}>2754023087</p>
                         </div>
                     </div>
                 </div>
+                <div className={"ml-3"}>
+                    <form className="w-full max-w-lg">
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="grid-first-name">
+                                    Ονομα
+                                </label>
+                                <input
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                    id="grid-first-name" type="text"/>
+                            </div>
+                            <div className="w-full md:w-1/2 px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="grid-last-name">
+                                    Επώνυμο
+                                </label>
+                                <input
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-last-name" type="text"/>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="grid-password">
+                                    Email
+                                </label>
+                                <input
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-password" type="email" />
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="grid-password">
+                                    Μύνημα
+                                </label>
+                                <textarea className={"form-textarea mt-1 block w-full border-2 border-gray-300"} rows="10"></textarea>
+                            </div>
+                        </div>
+                        <button
+                            className="shadow bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                            type="button">
+                            Αποστολή
+                        </button>
+                    </form>
+                </div>
             </div>
+
             <Footer/>
-        </>
+        </div>
     );
 }

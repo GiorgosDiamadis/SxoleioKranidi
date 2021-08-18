@@ -88,8 +88,9 @@ export default function Posts() {
 
 
     return (
-        <div>
+        <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
+
             <section className="latest max-w-7xl mx-auto mt-24">
                 {user && (
                     <div style={{display: "flex", justifyContent: "center"}}>
@@ -159,6 +160,7 @@ export default function Posts() {
 
                 </div>
             </section>
+
             <Footer/>
         </div>
     );

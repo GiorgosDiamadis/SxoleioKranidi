@@ -23,7 +23,7 @@ export default function Post() {
         }
     }, [postId]);
     return (
-        <div>
+        <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
             {post && (
                 <main className="max-w-6xl mx-auto mt-32 lg:mt-32 space-y-6">
@@ -41,7 +41,7 @@ export default function Post() {
                             <div data-aos={"zoom-out"} className="flex items-center lg:justify-center text-sm mt-4">
                                 <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
                                 <div className="ml-3 text-left">
-                                    <h5 className="font-bold">1ο Δημοτικό Κρανιδίου</h5>
+                                    <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
                                 </div>
                             </div>
                         </div>

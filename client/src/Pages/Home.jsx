@@ -22,8 +22,10 @@ export default function Home() {
     }, []);
 
     return (
-        <div>
+        <div >
             <Navbar/>
+
+
             <header className="showcase text-white">
                 <div data-aos={"zoom-out"} className="content">
                     <img src="upp.gif" className="logo" alt=""/>
@@ -116,6 +118,8 @@ export default function Home() {
                     </Link>
                 </div>
             </section>
+
+
             <Footer/>
         </div>
     );
