@@ -6,20 +6,49 @@ import {postRequest} from "../RequestController";
 import {Link} from "react-router-dom";
 import Footer from "../Components/Footer";
 import moment from "moment";
-import DateLine from "../Components/DateLine";
+import {Dropdown} from "primereact/dropdown";
 
 
 export default function Posts() {
     const {user} = useContext(AuthContext);
     const [allPosts, setPosts] = useState({});
-    const [numPosts, setNumPosts] = useState(0)
     const [currentMonth, setCurrentMonth] = useState(null);
     const [currentYear, setCurrentYear] = useState(null);
     const [months] = useState(['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάϊος', 'Ιούνιος', 'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος']);
 
+
+    const monthOptions = [
+        {name: 'Ιανουάριος'},
+        {name: 'Φεβρουάριος'},
+        {name: 'Μάρτιος'},
+        {name: 'Απρίλιος'},
+        {name: 'Μάϊος'},
+        {name: 'Ιούνιος'},
+        {name: 'Ιούλιος'},
+        {name: 'Αύγουστος'},
+        {name: 'Σεπτέμβριος'},
+        {name: 'Οκτώβριος'},
+        {name: 'Νοέμβριος'},
+        {name: 'Δεκέμβριος'},
+    ];
+
+    const yearOptions = [
+        {name: '2021'},
+        {name: '2022'},
+        {name: '2023'},
+        {name: '2024'},
+        {name: '2025'},
+        {name: '2026'},
+        {name: '2027'},
+        {name: '2028'},
+        {name: '2029'},
+        {name: '2030'},
+        {name: '2031'},
+        {name: '2032'},
+    ]
     useEffect(() => {
-        setCurrentYear(new Date().getFullYear())
-        setCurrentMonth(months [new Date().getMonth()])
+        setCurrentYear({name: new Date().getFullYear().toString()})
+        setCurrentMonth({name: months [new Date().getMonth()]})
     }, [])
 
 
@@ -33,12 +62,6 @@ export default function Posts() {
                 return (a.publishedAt < b.publishedAt) ? 0 : ((a.publishedAt > b.publishedAt) ? -1 : 0);
             });
 
-            setNumPosts(data.length);
-
-            if(data.length === 1){
-                setPosts(data[0])
-                return
-            }
 
             let chunks = {}
 
@@ -89,47 +112,44 @@ export default function Posts() {
                     Ανακοινώσεις
                 </h1>
 
+                <h2 className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
+                <div className="lg:grid lg:grid-cols-4 p-mb-5">
+                    <input disabled={true}  name=""/>
+                    <Dropdown value={currentMonth}  onChange={(e) => {
+                        setCurrentMonth(e.value)
+                    }} options={monthOptions} optionLabel="name" placeholder="Μήνας"/>
+                    <Dropdown onChange={(e) => {
+                        setCurrentYear(e.value)
+                    }} value={currentYear} options={yearOptions} optionLabel="name" placeholder="Χρονιά"/>
+                    <input disabled={true} name=""/>
 
-                {numPosts === 1 && allPosts && (
+                </div>
+
+                {Object.keys(allPosts).length > 0 && allPosts[currentYear.name][currentMonth.name].length === 1 && (
                     <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"fade-up"}
                         >
-                            <PostCard props={allPosts}/>
+                            <PostCard props={allPosts[currentYear.name][currentMonth.name][0]}/>
                         </div>
                     </div>
                 )}
 
 
-                {numPosts !== 1 && Object.keys(allPosts).length > 0 && currentMonth !== null && currentYear !== null &&
-                Object.keys(allPosts).map((year) => (
-                    Object.keys(allPosts[year]).map((month) => (
-                        <div key={`anakoinwseis xronias ${year} - ${month}`}>
+                <div className="lg:grid lg:grid-cols-2">
 
-                            <div className="lg:grid lg:grid-cols-1">
-                                <DateLine date={`${month} - ${year}`}/>
-                            </div>
+                    {Object.keys(allPosts).length > 0 && allPosts[currentYear.name][currentMonth.name].length > 1 && allPosts[currentYear.name][currentMonth.name].map((post, k) => (
 
-                            <div className="lg:grid lg:grid-cols-2">
-
-                                {allPosts[year][month].map((post, k) => (
-                                    <div
-                                        key={`anakoinwsi - ${k} - ${year} - ${month}`}
-                                        data-aos={k % 2 === 0 ? "fade-right" : "fade-left"}
-                                    >
-                                        <PostCard props={post}/>
-                                    </div>
-                                ))}
-
-                            </div>
-
-
+                        <div
+                            key={`anakoinwsi - ${k} - ${currentYear.name} - ${currentMonth.name}`}
+                            data-aos={k % 2 === 0 ? "fade-right" : "fade-left"}
+                        >
+                            <PostCard props={post}/>
                         </div>
-                    ))
-                ))
-                }
+                    ))}
 
+                </div>
             </section>
             <Footer/>
         </div>
