@@ -5,14 +5,15 @@ import {Link} from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
-const {postRequest} = require("../RequestController");
+import PostRequest from "../PostRequest";
+
 
 export default function Home() {
     const {user} = useContext(AuthContext);
     const [latestPosts, setLatestPosts] = useState([]);
 
     useEffect(() => {
-        postRequest("/posts", {amount: 2})
+        PostRequest("/posts", {amount: 2})
             .then(({data}) => {
                 setLatestPosts(data);
             })

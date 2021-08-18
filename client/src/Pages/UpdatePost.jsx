@@ -1,11 +1,11 @@
 import {useHistory, useParams} from "react-router-dom";
-import {postRequest, API} from "../RequestController";
 import {useEffect, useRef, useState} from "react";
 import Navbar from "../Components/Navbar";
 import {Toast} from "primereact/toast";
 import Spinner from "../Components/Spinner";
 import {Editor} from "primereact/editor";
 import axios from "axios";
+import PostRequest from "../PostRequest";
 
 export default function UpdatePost() {
     const [postId, setPostId] = useState(useParams().post_id);
@@ -62,7 +62,7 @@ export default function UpdatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `${API}/posts/update`,
+                `http://localhost:8080/posts/update`,
                 formData,
                 {
                     headers: {
@@ -83,7 +83,7 @@ export default function UpdatePost() {
     useEffect(() => {
         if (postId !== -1) {
             console.log(postId);
-            postRequest("/posts/get", {post_id: postId})
+            PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
                     setPost(data[0]);
                     setPostData(data[0])

@@ -2,8 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../useAuth";
 import moment from "moment";
 import {Link} from "react-router-dom";
-import {postRequest} from "../RequestController";
 import Spinner from "./Spinner";
+import PostRequest from "../PostRequest";
 
 
 export default function PostCard({props}) {
@@ -13,7 +13,7 @@ export default function PostCard({props}) {
 
     const deletePost = () => {
         setIsLoading(true);
-        postRequest("/posts/delete", {post_id: props.post_id}).then((res) => {
+        PostRequest("/posts/delete", {post_id: props.post_id}).then((res) => {
             setIsLoading(false);
             window.location.reload()
         }).catch((err) => {

@@ -2,11 +2,12 @@ import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../useAuth";
 import PostCard from "../Components/PostCard";
 import Navbar from "../Components/Navbar";
-import {postRequest} from "../RequestController";
+
 import {Link} from "react-router-dom";
 import Footer from "../Components/Footer";
 import moment from "moment";
 import {Dropdown} from "primereact/dropdown";
+import PostRequest from "../PostRequest";
 
 
 export default function Posts() {
@@ -56,7 +57,7 @@ export default function Posts() {
         if (currentMonth === null || currentYear === null)
             return
 
-        postRequest("/posts").then(({data}) => {
+        PostRequest("/posts").then(({data}) => {
 
             data = data.sort(function (a, b) {
                 return (a.publishedAt < b.publishedAt) ? 0 : ((a.publishedAt > b.publishedAt) ? -1 : 0);

@@ -1,7 +1,6 @@
 import {Toast} from "primereact/toast";
 import {Editor} from "primereact/editor";
 import React, {useEffect, Fragment, useRef, useState} from "react";
-import {API} from "../RequestController";
 import Navbar from "../Components/Navbar";
 
 import axios from "axios";
@@ -78,7 +77,7 @@ export default function CreatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `${API}/posts/create`,
+                `http://localhost:8080/posts/create`,
                 formData,
                 {
                     headers: {

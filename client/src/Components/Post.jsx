@@ -3,7 +3,8 @@ import Navbar from "./Navbar";
 import moment from "moment";
 import {Link, useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
-import {postRequest} from "../RequestController";
+import PostRequest from "../PostRequest";
+
 
 export default function Post() {
     const [postId, setPostId] = useState(useParams().post_id);
@@ -12,7 +13,7 @@ export default function Post() {
     useEffect(() => {
         if (postId !== -1) {
             console.log(postId);
-            postRequest("/posts/get", {post_id: postId})
+            PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
                     setPost(data[0]);
                     console.log(data)

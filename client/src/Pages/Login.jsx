@@ -1,17 +1,13 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
-import {InputText} from "primereact/inputtext";
-import {Button} from "primereact/button";
-import {Card} from "primereact/card";
-import {Tooltip} from "primereact/tooltip";
 import {Toast} from "primereact/toast";
 
 import {useHistory} from "react-router-dom";
 import {AuthContext} from "../useAuth";
 import Navbar from "../Components/Navbar";
 import Spinner from "../Components/Spinner";
+import PostRequest from "../PostRequest";
 
-const {postRequest} = require("../RequestController");
-const {addClass, removeClass} = require("../domManipulation");
+
 
 export default function Login(props) {
     const [loginData, setLoginData] = useState({username: "", password: ""});
@@ -30,7 +26,7 @@ export default function Login(props) {
     const handleOnClick = (e) => {
         e.preventDefault()
         setIsLoading(true);
-        postRequest("user/login", {...loginData})
+        PostRequest("user/login", {...loginData})
             .then((response) => {
                 setIsLoading(false);
                 auth.login(

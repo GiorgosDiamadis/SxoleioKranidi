@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const path = require("path")
 
 var cloudinary = require("./Cloudinary");
 
@@ -35,6 +36,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.post("/user/login", loginValidation, login);
 
 app.post("/posts", getPosts);
@@ -42,6 +49,7 @@ app.post("/posts/get", getPost);
 app.post("/posts/create", isAuthenticated, savePostValidation, savePost);
 app.post("/posts/delete", isAuthenticated, deletePost);
 app.post("/posts/update", isAuthenticated, savePostValidation, updatePost);
+
 
 app.listen(PORT, () => {
     console.log(`Serving on port ${PORT}`);
