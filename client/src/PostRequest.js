@@ -1,5 +1,5 @@
 const axios = require("axios");
-const API = "https://194.63.239.197:8080";
+const API = "http://localhost:8080";
 const axiosClient = axios.create({baseURL: API});
 
 

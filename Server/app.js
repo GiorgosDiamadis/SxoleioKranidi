@@ -6,6 +6,7 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path")
+const mongoose = require('mongoose');
 
 var cloudinary = require("./Cloudinary");
 
@@ -34,6 +35,19 @@ app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "authorization");
     next();
+});
+
+mongoose.connect(process.env.MONGO, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Database connected");
 });
 
 app.use(express.static(path.join(__dirname, "build")));
