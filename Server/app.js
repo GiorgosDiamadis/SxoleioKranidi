@@ -31,30 +31,20 @@ const PORT = process.env.PORT || 8080;
 app.use(fileUpload({}));
 app.use(express.urlencoded({limit: "10mb"}));
 app.use(express.json({extended: false, limit: "10mb"}));
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+    app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "authorization");
     next();
 });
 
-mongoose.connect(process.env.MONGO, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-});
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
-});
 
-app.use(express.static(path.join(__dirname, "build")));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "build")));
+//
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 app.post("/user/login", loginValidation, login);
 

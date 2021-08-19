@@ -13,7 +13,7 @@ export default function PostCard({props}) {
 
     const deletePost = () => {
         setIsLoading(true);
-        PostRequest("/posts/delete", {post_id: props.post_id}).then((res) => {
+        PostRequest("/posts/delete", {post_id: props._id}).then((res) => {
             setIsLoading(false);
             window.location.reload()
         }).catch((err) => {
@@ -33,7 +33,7 @@ export default function PostCard({props}) {
                         style={{display: "flex", justifyContent: "center"}}
                         className={" absolute"}
                     >
-                        <Link to={`/posts/update/${props.post_id}`}>
+                        <Link to={`/posts/update/${props._id}`}>
                             <button
                                 className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                                 Επεξεργασία
@@ -87,7 +87,7 @@ export default function PostCard({props}) {
 
                             <div>
                                 <Link
-                                    to={`/posts/${props.post_id}`}
+                                    to={`/posts/${props._id}`}
                                     className="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
                                 >
                                     Περισσότερα

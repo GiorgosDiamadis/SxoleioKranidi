@@ -1,52 +1,28 @@
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 
-class User {
-  constructor(username, password, email) {
-    this.username = username;
-    this.password = password;
-    this.email = email;
-  }
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-  static async findOne(data) {
-    const { username } = data;
-    return new Promise(function (resolve, reject) {
-      db.query(
-        `select *
-                     from users
-                     where username = '${username}'`,
-        function (err, res) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(res[0]);
-          }
-        }
-      );
-    });
-  }
+const UserSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    pass: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    }
+});
+// UserSchema.methods.comparePassword = async (password) => {
+//     return ;
+// }
 
-  static async comparePassword(password, userPassword) {
-    return await bcrypt.compare(password, userPassword);
-  }
-
-  async save() {
-    let salt = await bcrypt.genSalt(12);
-    this.password = await bcrypt.hash(this.password, salt);
-    return new Promise(function (resolve, reject) {
-      db.query(
-        `insert into users(username, pass, email)
-                     values ('${this.username}', '${this.password}', '${this.email}')`,
-        function (err, res) {
-          if (res === undefined) {
-            reject(new Error("Error rows is undefined"));
-          } else {
-            resolve(res[0]);
-          }
-        }
-      );
-    });
-  }
-}
-
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

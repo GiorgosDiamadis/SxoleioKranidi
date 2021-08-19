@@ -35,6 +35,7 @@ export default function Login(props) {
                     },
                     response.headers.authorization
                 );
+                console.log(response)
                 history.push("/");
             })
             .catch((res) => {

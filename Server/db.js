@@ -1,15 +1,16 @@
 const mariadb = require("mariadb");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
-const pool = mariadb.createPool({
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
-    connectionLimit: 5,
-    allowPublicKeyRetrieval: true,
-});
+// const pool = mariadb.createPool({
+//     user: process.env.DB_USERNAME,
+//     password: process.env.DB_PASSWORD,
+//     host: process.env.DB_HOST,
+//     port: process.env.DB_PORT,
+//     database: process.env.DB_DATABASE,
+//     connectionLimit: 5,
+//     allowPublicKeyRetrieval: true,
+// });
 // pool.getConnection()
 //     .then(conn => {
 //
@@ -33,5 +34,18 @@ const pool = mariadb.createPool({
 //
 // });
 
-module.exports = pool;
+mongoose.connect(process.env.MONGO, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Database connected");
+});
+
+module.exports = db;
 
