@@ -77,7 +77,7 @@ export default function CreatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `http://localhost:8080/posts/create`,
+                `/posts/create`,
                 formData,
                 {
                     headers: {
@@ -86,8 +86,7 @@ export default function CreatePost() {
                 }
             );
             setIsLoading(false);
-            console.log(res)
-            history.push(`/posts/${res.data._id}`);
+            history.push(`/posts/${res.data.rs}`);
         } catch (err) {
             setIsLoading(false);
             setErrors(err.response.data.errors);

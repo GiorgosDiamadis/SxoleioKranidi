@@ -54,7 +54,7 @@ export default function UpdatePost() {
 
         formData.append("body", postData.body);
         formData.append("summary", postData.summary);
-        formData.append("post_id", post._id);
+        formData.append("post_id", post.post_id);
 
         formData.append("imgURL", post.imgURL);
         formData.append("public_id", post.public_id);
@@ -62,7 +62,7 @@ export default function UpdatePost() {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                `http://localhost:8080/posts/update`,
+                `/posts/update`,
                 formData,
                 {
                     headers: {
@@ -85,8 +85,8 @@ export default function UpdatePost() {
             console.log(postId);
             PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
-                    setPost(data);
-                    setPostData(data)
+                    setPost(data[0]);
+                    setPostData(data[0])
                 })
                 .catch((reason) => {
                     console.log(reason);

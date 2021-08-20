@@ -15,7 +15,7 @@ export default function Post() {
             console.log(postId);
             PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
-                    setPost(data);
+                    setPost(data[0]);
                     console.log(data)
                 })
                 .catch((reason) => {

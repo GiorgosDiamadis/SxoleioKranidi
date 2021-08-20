@@ -6,11 +6,18 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path")
-const mongoose = require('mongoose');
-
 var cloudinary = require("./Cloudinary");
 
 const fileUpload = require("express-fileupload");
+
+// var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
+//
+//
+// process.stdout.write = process.stderr.write = access.write.bind(access);
+const db = require("./db");
+
+
+
 const {
     getPosts,
     savePost,
@@ -31,20 +38,18 @@ const PORT = process.env.PORT || 8080;
 app.use(fileUpload({}));
 app.use(express.urlencoded({limit: "10mb"}));
 app.use(express.json({extended: false, limit: "10mb"}));
-    app.use(cors({origin: "http://localhost:3000", credentials: true}));
+// app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "authorization");
     next();
 });
 
 
+app.use(express.static(path.join(__dirname, "build")));
 
-
-// app.use(express.static(path.join(__dirname, "build")));
-//
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.post("/user/login", loginValidation, login);
 
@@ -55,6 +60,10 @@ app.post("/posts/delete", isAuthenticated, deletePost);
 app.post("/posts/update", isAuthenticated, savePostValidation, updatePost);
 
 
-app.listen(PORT, () => {
-    console.log(`Serving on port ${PORT}`);
-});
+app.listen(PORT, () => {console.log(`Serving on port ${PORT}`);});
+
+
+
+
+
+

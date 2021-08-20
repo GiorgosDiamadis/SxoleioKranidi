@@ -8,11 +8,11 @@ const {log} = require("nodemon/lib/utils");
 
 module.exports.getPosts = catchAsync(async (req, res, next) => {
     const {amount} = req.body;
-    let posts = await Post.find({}).sort({publishedAt: -1});
+    let posts;
     if (amount) {
-
+        posts = await Post.getAll(amount);
     } else {
-
+        posts = await Post.getAll();
     }
 
     res.status(200).send(posts);
@@ -20,7 +20,7 @@ module.exports.getPosts = catchAsync(async (req, res, next) => {
 module.exports.getPost = catchAsync(async (req, res, next) => {
     const {post_id} = req.body;
 
-    let post = await Post.findById(post_id);
+    let post = await Post.get(post_id);
 
     res.status(200).send(post);
 });
@@ -59,20 +59,18 @@ module.exports.savePost = catchAsync(async (req, res, next) => {
     }
 
     let {title, body, summary} = req.body;
-    let publishedAt = new Date().toISOString();
 
-    const newPost = new Post({title, body, summary, publishedAt, imgURL, public_id});
-    console.log(newPost)
+    const newPost = new Post(title, body, summary, imgURL, public_id);
+    const rs = await newPost.save();
 
-    await newPost.save();
-    res.status(200).send(newPost);
-
+    res.status(200).send({rs});
 });
 module.exports.deletePost = catchAsync(async (req, res, next) => {
     const {post_id} = req.body;
-    let post = await Post.findById(post_id);
-    let p_id = post.public_id;
-    const rs = await Post.findByIdAndDelete(post_id);
+    const post = await Post.get(post_id);
+    let p_id = post[0].public_id;
+    console.log(post)
+    const rs = await Post.delete(post_id);
     try {
         await cloudinary.uploader.destroy(p_id)
 
@@ -90,17 +88,16 @@ module.exports.updatePost = catchAsync(async (req, res, next) => {
         return;
     }
 
-
+    console.log(req.body)
+    console.log(req.files)
     let {title, body, post_id, summary, imgURL, public_id} = req.body;
-
-    console.log(post_id)
 
     if (req.files !== null) {
 
-        try {
+        try{
             await cloudinary.uploader.destroy(public_id);
 
-        } catch (e) {
+        }catch (e){
 
         }
 
@@ -124,10 +121,7 @@ module.exports.updatePost = catchAsync(async (req, res, next) => {
         await fs.unlinkSync(filePath);
     }
 
-    const result = await Post.findByIdAndUpdate(post_id
-        , {
-            title, body, summary, imgURL, public_id, post_id
-        });
+    const result = await Post.update(title, body, summary, imgURL, public_id, post_id);
 
     res.status(200).send(result);
 });
