@@ -6,6 +6,7 @@ import {AuthContext} from "../useAuth";
 export default function Navbar() {
 
     const auth = useContext(AuthContext);
+    console.log(auth)
     let history = useHistory();
     return (
         <nav className=" w-full shadow-lg" style={{position: "fixed", zIndex: 2}}>
@@ -35,10 +36,17 @@ export default function Navbar() {
                     {/**/}
 
                     <div className="hidden md:flex items-center space-x-3 ">
-                        <Link to={"/login"}
-                              className={`py-4 px-2 ${history.location.pathname==="/login" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/login" ? "border-b-4 border-blue-300" : ""} `}>
-                            Σύνδεση
-                        </Link>
+                        {auth.user === null ? (
+                            <Link to={"/login"}
+                                  className={`py-4 px-2 ${history.location.pathname==="/login" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/login" ? "border-b-4 border-blue-300" : ""} `}>
+                                Σύνδεση
+                            </Link>
+                        ):(
+                            <a onClick={()=>auth.logout()}
+                               className={`py-4 px-2 ${history.location.pathname==="/login" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/login" ? "border-b-4 border-blue-300" : ""} `}>
+                                Αποσύνδεση
+                            </a>
+                        )}
                     </div>
 
                     <div className="md:hidden flex items-center">
@@ -90,10 +98,18 @@ export default function Navbar() {
                     </Link>
                     </li>
                     <li>
-                        <Link to={"/login"}
-                              className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white">
-                        Σύνδεση
+                        {auth.user === null ? (
+                            <Link to={"/login"}
+                                                     className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white">
+                            Σύνδεση
                         </Link>
+                        ):(
+                            <a onClick={()=>auth.logout()}
+                                        className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white">
+                            Αποσύνδεση
+                        </a>
+                        )}
+
                     </li>
                 </ul>
             </div>
