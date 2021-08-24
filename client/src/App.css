@@ -5,6 +5,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
 }
 
 h1 {
@@ -41,8 +42,6 @@ code {
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
 }
 
 .date-line-h2{

@@ -27,8 +27,8 @@ export default function Home() {
             <Navbar/>
 
 
-            <header className="showcase text-white">
-                <div data-aos={"zoom-out"} className="content">
+            <header  className="showcase text-white">
+                <div data-aos={"zoom-out"} data-aos-duration={1500} className="content">
                     <img src="upp.gif" className="logo" alt=""/>
                     <div className="text-6xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
@@ -84,6 +84,18 @@ export default function Home() {
                 <h1 className={"font-bold text-5xl text-center mt-6 mb-6"}>
                     Τελευταίες ανακοινώσεις
                 </h1>
+
+                {latestPosts && latestPosts.length === 0 &&(
+                    <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
+                        <div
+                            key={`anakoinwsi${0}`}
+                            data-aos={"zoom-out"}
+                        >
+                            <h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
+                        </div>
+
+                    </div>
+                )}
 
                 {latestPosts && latestPosts.length === 1 && (
 

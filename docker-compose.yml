@@ -26,10 +26,9 @@ services:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
       MARIADB_USER: ${DB_USERNAME}
       MARIADB_DATABASE: ${DB_DATABASE}
-      MARIADB_ROOT_HOST: ${DB_HOST}
       MARIADB_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3307"
+      - "3306:3306"
 
 volumes:
   db-data:

@@ -31,11 +31,7 @@ export default function Contact() {
                         </div>
                         <div className={"mr-6"}>
                             <i className="fas fa-envelope text-3xl"></i>
-                            <p className={"inline-block text-xl ml-2"}>1dimkra@arg.sch.gr</p>
-                        </div>
-                        <div>
-                            <i className="fas fa-fax text-3xl"></i>
-                            <p className={"inline-block text-xl ml-2"}>2754023087</p>
+                            <p className={"inline-block text-xl ml-2"}>mail@1dim-kranid.arg.sch.gr</p>
                         </div>
                     </div>
                 </div>

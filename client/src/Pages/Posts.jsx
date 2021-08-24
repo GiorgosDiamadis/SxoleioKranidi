@@ -86,7 +86,7 @@ export default function Posts() {
             setPosts(chunks);
         });
     }, [currentMonth, currentYear]);
-
+    console.log(allPosts)
 
     return (
         <div className={"flex flex-col h-screen justify-between"}>
@@ -114,7 +114,8 @@ export default function Posts() {
                     Ανακοινώσεις
                 </h1>
 
-                <h2 data-aos={"zoom-out"} className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
+                <h2 data-aos={"zoom-out"}
+                    className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
                 <div data-aos={"zoom-out"} className="lg:grid lg:grid-cols-4 p-mb-5">
                     <input disabled={true} name=""/>
                     <Dropdown value={currentMonth} onChange={(e) => {
@@ -126,6 +127,21 @@ export default function Posts() {
                     <input disabled={true} name=""/>
 
                 </div>
+
+                {(Object.keys(allPosts).length === 0 || !allPosts[currentYear.name] ||
+                !allPosts[currentYear.name][currentMonth.name] ||
+                    allPosts[currentYear.name][currentMonth.name].length === 0) && (
+                    <div className="lg:grid lg:grid-cols-1">
+                        <div
+                            key={`anakoinwsi${0}`}
+                            data-aos={"zoom-out"}
+                        >
+                            <h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
+                        </div>
+
+                    </div>
+                )}
+
 
                 {Object.keys(allPosts).length > 0 &&
                 allPosts[currentYear.name] &&
