@@ -131,7 +131,7 @@ export default function Posts() {
                 {(Object.keys(allPosts).length === 0 || !allPosts[currentYear.name] ||
                 !allPosts[currentYear.name][currentMonth.name] ||
                     allPosts[currentYear.name][currentMonth.name].length === 0) && (
-                    <div className="lg:grid lg:grid-cols-1">
+                    <div className="lg:grid lg:grid-cols-1 mb-2">
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"zoom-out"}
@@ -149,7 +149,7 @@ export default function Posts() {
                 allPosts[currentYear.name][currentMonth.name] &&
                 allPosts[currentYear.name][currentMonth.name].length === 1 &&
                 (
-                    <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
+                    <div className="lg:grid lg:grid-cols-1 mb-2" style={{width: "600px", margin: "auto"}}>
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"fade-up"}
@@ -160,7 +160,7 @@ export default function Posts() {
                 )}
 
 
-                <div className="lg:grid lg:grid-cols-2">
+                <div className="lg:grid lg:grid-cols-2 mb-2">
 
                     {Object.keys(allPosts).length > 0 &&
                     allPosts[currentYear.name] &&
