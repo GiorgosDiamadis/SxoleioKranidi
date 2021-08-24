@@ -30,7 +30,7 @@ export default function Home() {
             <header  className="showcase text-white">
                 <div data-aos={"zoom-out"} data-aos-duration={1500} className="content">
                     <img src="upp.gif" className="logo" alt=""/>
-                    <div className="text-6xl mt-10 leading-tight">
+                    <div className="text-3xl sm:text-6xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
                     </div>
                 </div>
@@ -52,6 +52,7 @@ export default function Home() {
                             />
                         </div>
                         <div
+
                             className="w-full md:w-7/12 ml-auto mr-auto px-4"
                             data-aos={"fade-left"}
                         >
@@ -86,7 +87,7 @@ export default function Home() {
                 </h1>
 
                 {latestPosts && latestPosts.length === 0 &&(
-                    <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
+                    <div className="lg:grid lg:grid-cols-1">
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"zoom-out"}
@@ -99,7 +100,7 @@ export default function Home() {
 
                 {latestPosts && latestPosts.length === 1 && (
 
-                    <div className="lg:grid lg:grid-cols-1" style={{width: "600px", margin: "auto"}}>
+                    <div className="md:grid md:grid-cols-1" style={{width: "600px", margin: "auto"}}>
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"fade-up"}
@@ -111,7 +112,7 @@ export default function Home() {
 
                 )}
 
-                <div className="lg:grid lg:grid-cols-2">
+                <div className="md:grid md:grid-cols-2">
                     {latestPosts && latestPosts.length > 1 &&
                     latestPosts.map((post, i) => (
                         <div key={`anakoinwsi${i}`} data-aos={"fade-up"}>

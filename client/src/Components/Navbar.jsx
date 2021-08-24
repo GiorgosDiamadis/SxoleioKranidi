@@ -1,63 +1,101 @@
 import React, {useContext} from "react";
 import NavLink from "./NavLink";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {AuthContext} from "../useAuth";
 
 export default function Navbar() {
 
     const auth = useContext(AuthContext);
+    let history = useHistory();
     return (
-        <nav style={{position: "fixed", zIndex: 2}}
-             className="flex w-full items-center justify-between flex-wrap bg-teal-500 fixed top-0 py-4 px-5">
-            <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <img src="/upp.gif" className={"w-12 h-12"} alt=""/>
-                <span className="font-semibold text-xl md:text-3xl ml-2 tracking-tight">1ο Δημοτικό Σχολείο</span>
+        <nav className=" w-full shadow-lg" style={{position: "fixed", zIndex: 2}}>
+            <div className=" px-4">
+                <div className="flex justify-between">
+                    <div className="flex space-x-7">
+                        <div>
+                            <a href="#" className="flex items-center py-4 px-2">
+                                <img src="/upp.gif" alt="Logo" className="h-8 w-8 mr-2"/>
+                                <span className=" text-white text-lg">1ο Δημοτικό Σχολείο</span>
+                            </a>
+                        </div>
+
+                        <div className="hidden md:flex items-center space-x-1">
+                            <Link to={"/"} className={`py-4 px-2 ${history.location.pathname==="/" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/" ? "border-b-4 border-blue-300" : ""} `}>
+                                Αρχική
+                            </Link>
+
+                            <Link to={"/posts"} className={`py-4 px-2 ${history.location.pathname==="/posts" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/posts" ? "border-b-4 border-blue-300" : ""} `}>
+                                Ανακοινώσεις
+                            </Link>
+                            <Link to={"/contact"} className={`py-4 px-2 ${history.location.pathname==="/contact" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/contact" ? "border-b-4 border-blue-300" : ""} `}>
+                                Επικοινωνία
+                            </Link>
+                        </div>
+                    </div>
+                    {/**/}
+
+                    <div className="hidden md:flex items-center space-x-3 ">
+                        <Link to={"/login"}
+                              className={`py-4 px-2 ${history.location.pathname==="/login" ? "text-blue-300" : "text-white "  } hover:text-blue-300 ${history.location.pathname==="/login" ? "border-b-4 border-blue-300" : ""} `}>
+                            Σύνδεση
+                        </Link>
+                    </div>
+
+                    <div className="md:hidden flex items-center">
+                        <button className="outline-none mobile-menu-button"
+                                onClick={() => {
+                                    let menu = document.getElementById("menu");
+                                    if (menu) {
+                                        if (menu.classList.contains("hidden")) {
+                                            menu.classList.remove("hidden");
+                                        } else {
+                                            menu.classList.add("hidden");
+                                        }
+                                    }
+                                }}
+                        >
+                            <svg className=" w-6 h-6 text-white hover:text-blue-500 "
+                                 x-show="!showMenu"
+                                 fill="none"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 stroke-width="2"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                            >
+                                <path d="M4 6h16M4 12h16M4 18h16">
+
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <span
-                onClick={()=>{
-                    let menu = document.getElementById("menu");
-                    if(menu){
-                        if(menu.classList.contains("hidden")){
-                            menu.classList.remove("hidden");
-                        }else{
-                            menu.classList.add("hidden");
-                        }
-                    }
-                }}
-                className="visible relative lg:hidden cursor-pointer inline-block text-sm px-4 py-2 leading-none border rounded text-white border-blue-300  hover:border-transparent hover:bg-blue-500  mt-4 lg:mt-0">
 
-                    <i className="fas fa-bars">
-
-                    </i>
-                </span>
-            <div id={"menu"} className="hidden md:block  w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div className="text-sm lg:flex-grow">
-                    <Link to={"/"}
-                          className="block mt-4 lg:inline-block lg:mt-0 text-white text-center hover:bg-blue-500 lg:mr-4 hover:border-transparent border rounded border-blue-300 px-4 py-2">
+            <div className="hidden mobile-menu" id={"menu"}>
+                <ul className="">
+                    <li>
+                        <Link to={"/"} className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white ">
                         Αρχική
                     </Link>
-                    <Link to={"/posts"}
-                          className="block mt-4 lg:inline-block lg:mt-0 text-white text-center hover:bg-blue-500 hover:border-transparent  lg:mr-4 border rounded border-blue-300 px-4 py-2">
+                    </li>
+                    <li>
+                        <Link to={"/posts"} className="block text-sm px-2 py-4 text-white hover:bg-blue-500 ">
                         Ανακοινώσεις
                     </Link>
-                    <Link to={"/contact"}
-                          className="block mt-4 lg:inline-block lg:mt-0 text-white text-center hover:bg-blue-500 hover:border-transparent border rounded border-blue-300 px-4 py-2">
+                    </li>
+                    <li>
+                        <Link to={"/contact"} className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white">
                         Επικοινωνία
                     </Link>
-                </div>
-                {auth.user === null ? (
-                        <div>
-                            <Link to={"/login"}
-                                  className="block lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white text-center border-blue-300  hover:border-transparent hover:bg-blue-500  mt-4 lg:mt-0">Σύνδεση</Link>
-                        </div>
-                    ) :
-                    (
-                        <div>
-                            <a onClick={() => auth.logout()}
-                               className="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-white text-center border-blue-300  hover:border-transparent hover:bg-blue-500  mt-4 lg:mt-0">Αποσύνδεση</a>
-                        </div>
-                    )
-                }
+                    </li>
+                    <li>
+                        <Link to={"/login"}
+                              className="block text-sm px-2 py-4 text-white hover:bg-blue-500 hover:text-white">
+                        Σύνδεση
+                        </Link>
+                    </li>
+                </ul>
             </div>
 
         </nav>

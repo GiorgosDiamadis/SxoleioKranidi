@@ -116,9 +116,9 @@ export default function Posts() {
 
                 <h2 data-aos={"zoom-out"}
                     className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
-                <div data-aos={"zoom-out"} className="lg:grid lg:grid-cols-4 p-mb-5">
+                <div data-aos={"zoom-out"} className=" md:grid md:grid-cols-4 p-mb-5">
                     <input disabled={true} name=""/>
-                    <Dropdown value={currentMonth} onChange={(e) => {
+                    <Dropdown value={currentMonth} className={"block"} onChange={(e) => {
                         setCurrentMonth(e.value)
                     }} options={monthOptions} optionLabel="name" placeholder="Μήνας"/>
                     <Dropdown onChange={(e) => {
@@ -136,7 +136,8 @@ export default function Posts() {
                             key={`anakoinwsi${0}`}
                             data-aos={"zoom-out"}
                         >
-                            <h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
+                            {currentMonth && currentYear && (<h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις για {currentMonth.name} - {currentYear.name}</h1>)}
+
                         </div>
 
                     </div>

@@ -4,18 +4,16 @@ import Footer from "../Components/Footer";
 
 
 export default function Contact() {
-    const [show, setShow] = useState();
-    const [show1, setShow1] = useState();
-    const [show2, setShow2] = useState();
+
     return (
         <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
-            <h3 data-aos={"zoom-out"} className=" mt-32 font-bold text-5xl text-center">
+            <h3 data-aos={"zoom-out"} className="hidden md:block mt-32 font-bold text-5xl text-center">
                 Επικοινωνία
             </h3>
             <div style={{boxShadow: "0 20px 30px rgba(0, 0, 0, 0.35)"}}
                  data-aos={"zoom-out"}
-                 className={"flex mt-4 m-auto justify-center  rounded-2xl p-6"}>
+                 className={"mt-32 lg:mt-0 m-auto flex flex-col justify-center lg:flex-row items-center rounded-2xl p-6 mb-32"}>
 
                 <div>
                     <iframe
@@ -24,12 +22,12 @@ export default function Contact() {
                         width="600" height="450" allowFullScreen="" loading="lazy">
 
                     </iframe>
-                    <div className={"flex"}>
-                        <div className={"mr-6"}>
+                    <div className={"flex justify-between"}>
+                        <div className={"mr-6 mt-2 mb-2"}>
                             <i className="fas fa-phone-volume text-3xl"></i>
                             <p className={"inline-block text-xl ml-2"}>2754021478</p>
                         </div>
-                        <div className={"mr-6"}>
+                        <div className={"mr-6 mt-2 mb-2"}>
                             <i className="fas fa-envelope text-3xl"></i>
                             <p className={"inline-block text-xl ml-2"}>mail@1dim-kranid.arg.sch.gr</p>
                         </div>

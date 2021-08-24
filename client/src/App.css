@@ -38,6 +38,7 @@ code {
     width: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("Images/sxoleio.jpg");
+
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -193,10 +194,25 @@ nav {
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* MEDIA QUERIES */
 
-/*Small screens*/
-@media (max-width: 560px) {
+
+.loader {
+    border-top-color: #3498db;
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+}
+
+.footer-distributed{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #cecece;
+    width: 100%;
+    padding: 10px;
+}
+
+
+@media (max-width: 640px) {
     .showcase::after {
         height: 50vh;
     }
@@ -214,22 +230,6 @@ nav {
     .content .text {
         display: none;
     }
-
-    .grid-4,
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-
-    .services div {
-        border-bottom: #333 dashed 1px;
-        padding: 1.2rem 1rem;
-    }
-}
-
-.loader {
-    border-top-color: #3498db;
-    -webkit-animation: spinner 1.5s linear infinite;
-    animation: spinner 1.5s linear infinite;
 }
 
 @-webkit-keyframes spinner {
@@ -247,18 +247,6 @@ nav {
     }
     100% {
         transform: rotate(360deg);
-    }
-}
-
-/*Landscape*/
-@media (max-height: 500px) {
-    .content .title,
-    .content .text {
-        /*display: none;*/
-    }
-
-    .content {
-        top: 0;
     }
 }
 
@@ -284,12 +272,4 @@ nav {
     .login-register-card {
         flex: 0.9;
     }
-}
-.footer-distributed{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #cecece;
-    width: 100%;
-    padding: 10px;
 }

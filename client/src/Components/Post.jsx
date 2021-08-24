@@ -24,6 +24,7 @@ export default function Post() {
         }
     }, [postId]);
     return (
+
         <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
             {post && (
@@ -32,6 +33,7 @@ export default function Post() {
                         <div className="col-span-4 lg:text-center lg:pt-14 mb-10">
                             <div data-aos={"zoom-out"} dangerouslySetInnerHTML={{__html: post.imgURL}}
                                  className={"rounded-xl"}>
+
 
                             </div>
 

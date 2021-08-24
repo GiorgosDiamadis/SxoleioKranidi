@@ -3,17 +3,17 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
-const cors = require("cors");
+
 const fs = require("fs");
 const path = require("path")
-var cloudinary = require("./Cloudinary");
+
 
 const fileUpload = require("express-fileupload");
 
-// var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
-//
-//
-// process.stdout.write = process.stderr.write = access.write.bind(access);
+var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
+
+
+process.stdout.write = process.stderr.write = access.write.bind(access);
 const db = require("./db");
 
 
@@ -38,7 +38,7 @@ const PORT = process.env.PORT || 8080;
 app.use(fileUpload({}));
 app.use(express.urlencoded({limit: "10mb"}));
 app.use(express.json({extended: false, limit: "10mb"}));
-// app.use(cors({origin: "http://localhost:3000", credentials: true}));
+
 app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "authorization");
     next();
