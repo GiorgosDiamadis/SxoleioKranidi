@@ -9,13 +9,11 @@ const path = require("path")
 
 
 const fileUpload = require("express-fileupload");
-
-var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
-
-
-process.stdout.write = process.stderr.write = access.write.bind(access);
+// var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
+//
+//
+// process.stdout.write = process.stderr.write = access.write.bind(access);
 const db = require("./db");
-
 
 
 const {
@@ -31,6 +29,8 @@ const {
     saveValidation: savePostValidation,
 } = require("./Middleware/validatePost");
 const isAuthenticated = require("./Middleware/isAuthenticated");
+const {sendEmail} = require("./Controllers/mail");
+const {validateEmail} = require("./Middleware/validateEmail");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -58,12 +58,9 @@ app.post("/posts/get", getPost);
 app.post("/posts/create", isAuthenticated, savePostValidation, savePost);
 app.post("/posts/delete", isAuthenticated, deletePost);
 app.post("/posts/update", isAuthenticated, savePostValidation, updatePost);
+app.post("/email/send", validateEmail ,sendEmail)
 
 
-app.listen(PORT, () => {console.log(`Serving on port ${PORT}`);});
-
-
-
-
-
-
+app.listen(PORT, () => {
+    console.log(`Serving on port ${PORT}`);
+});

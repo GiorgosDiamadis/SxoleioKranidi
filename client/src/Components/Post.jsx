@@ -2,24 +2,48 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import moment from "moment";
 import {Link, useParams} from "react-router-dom";
-import {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import PostRequest from "../PostRequest";
+import {Toast} from "primereact/toast";
+import {useHistory} from "react-router";
 
 
 export default function Post() {
     const [postId, setPostId] = useState(useParams().post_id);
     const [post, setPost] = useState(null);
+    const toast = useRef(null);
+    const history = useHistory();
 
     useEffect(() => {
         if (postId !== -1) {
-            console.log(postId);
+            if (history.location.state && history.location.state.post) {
+                toast.current.show({
+                    severity: "success",
+                    summary: "Επιτυχής δημιουργία ανακοίνωσης",
+                    sticky: false,
+                });
+                history.replace({
+                    pathname: history.location.pathname,
+                    state: {}
+                });
+            }else if(history.location.state && history.location.state.update){
+                toast.current.show({
+                    severity: "success",
+                    summary: "Επιτυχής επεξεργασία ανακοίνωσης",
+                    sticky: false,
+                });
+                history.replace({
+                    pathname: history.location.pathname,
+                    state: {}
+                });
+            }
             PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
                     setPost(data[0]);
-                    console.log(data)
+
                 })
                 .catch((reason) => {
-                    console.log(reason);
+
                 });
         }
     }, [postId]);
@@ -27,10 +51,11 @@ export default function Post() {
 
         <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
+            <Toast ref={toast} position={"top-center"}/>
             {post && (
-                <main className="max-w-6xl mx-auto mt-32 lg:mt-32 space-y-6">
-                    <article className="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
-                        <div className="col-span-4 lg:text-center lg:pt-14 mb-10">
+                <main className="max-w-6xl mx-auto mt-32 mt-32 space-y-6">
+                    <article className="max-w-4xl mx-auto grid grid-cols-12 gap-x-10 border-2 border-gray-150 rounded-xl p-3">
+                        <div className="col-span-4 text-center pt-14 mb-10">
                             <div data-aos={"zoom-out"} dangerouslySetInnerHTML={{__html: post.imgURL}}
                                  className={"rounded-xl"}>
 
@@ -38,10 +63,10 @@ export default function Post() {
                             </div>
 
                             <p data-aos={"zoom-out"} className="mt-4 block text-gray-400 text-xs">
-                                Δημοσιεύτηκε στις  <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
+                                Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
                             </p>
 
-                            <div data-aos={"zoom-out"} className="flex items-center lg:justify-center text-sm mt-4">
+                            <div data-aos={"zoom-out"} className="flex items-center justify-center text-sm mt-4">
                                 <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
                                 <div className="ml-3 text-left">
                                     <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
@@ -50,7 +75,7 @@ export default function Post() {
                         </div>
 
                         <div className="col-span-8">
-                            <div data-aos={"zoom-out"} className="hidden lg:flex justify-between mb-6">
+                            <div data-aos={"zoom-out"} className="flex justify-between mb-6">
                                 <Link to={"/posts"}>
                                     <button
                                         className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">
@@ -59,7 +84,7 @@ export default function Post() {
                                 </Link>
                             </div>
 
-                            <h1 data-aos={"zoom-out"} className="font-bold text-3xl lg:text-4xl mb-10">
+                            <h1 data-aos={"zoom-out"} className="font-bold text-xl sm:text-4xl mb-10">
                                 {post.title}
                             </h1>
 

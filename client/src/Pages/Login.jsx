@@ -29,13 +29,14 @@ export default function Login(props) {
         PostRequest("user/login", {...loginData})
             .then((response) => {
                 setIsLoading(false);
+
                 auth.login(
                     {
                         ...response.data.user,
                     },
                     response.headers.authorization
                 );
-                history.push("/");
+                history.push("/", {login:"success"});
             })
             .catch((res) => {
                 setIsLoading(false);

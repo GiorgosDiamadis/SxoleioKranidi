@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {AuthContext} from "../useAuth";
 import PostCard from "../Components/PostCard";
 import {Link} from "react-router-dom";
@@ -6,31 +6,43 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
 import PostRequest from "../PostRequest";
+import {useHistory} from "react-router";
+import {Toast} from "primereact/toast";
 
 
 export default function Home() {
     const {user} = useContext(AuthContext);
     const [latestPosts, setLatestPosts] = useState([]);
+    const history = useHistory();
+    const toast = useRef(null);
 
     useEffect(() => {
+        if (history.location.state && history.location.state.login) {
+            toast.current.show({
+                severity: "success",
+                summary: "Επιτυχής σύνδεση",
+                sticky: false,
+            });
+            history.replace('', null);
+        }
         PostRequest("/posts", {amount: 2})
             .then(({data}) => {
                 setLatestPosts(data);
             })
             .catch((reason) => {
-                console.log(reason);
+
             });
     }, []);
 
     return (
-        <div >
+        <div>
             <Navbar/>
 
-
-            <header  className="showcase text-white">
+            <Toast ref={toast} position={"top-center"}/>
+            <header className="showcase text-white">
                 <div data-aos={"zoom-out"} data-aos-duration={1500} className="content">
                     <img src="upp.gif" className="logo" alt=""/>
-                    <div className="text-3xl sm:text-6xl mt-10 leading-tight">
+                    <div className="text-3xl sm:text-5xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
                     </div>
                 </div>
@@ -86,7 +98,7 @@ export default function Home() {
                     Τελευταίες ανακοινώσεις
                 </h1>
 
-                {latestPosts && latestPosts.length === 0 &&(
+                {latestPosts && latestPosts.length === 0 && (
                     <div className="lg:grid lg:grid-cols-1">
                         <div
                             key={`anakoinwsi${0}`}

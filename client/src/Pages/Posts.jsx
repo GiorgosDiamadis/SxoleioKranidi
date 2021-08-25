@@ -86,7 +86,7 @@ export default function Posts() {
             setPosts(chunks);
         });
     }, [currentMonth, currentYear]);
-    console.log(allPosts)
+
 
     return (
         <div className={"flex flex-col h-screen justify-between"}>

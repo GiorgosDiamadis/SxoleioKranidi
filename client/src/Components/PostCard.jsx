@@ -17,7 +17,7 @@ export default function PostCard({props}) {
             setIsLoading(false);
             window.location.reload()
         }).catch((err) => {
-            console.log(err.response)
+
             setIsLoading(false);
         });
     }

@@ -86,7 +86,7 @@ export default function CreatePost() {
                 }
             );
             setIsLoading(false);
-            history.push(`/posts/${res.data.rs}`);
+            history.push(`/posts/${res.data.rs}`, {post: "success"});
         } catch (err) {
             setIsLoading(false);
             setErrors(err.response.data.errors);
@@ -101,6 +101,7 @@ export default function CreatePost() {
             <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
                 <div data-aos={"zoom-out"} className="max-w-2xl w-full space-y-8">
                     <div>
+
                         <img
                             className="mx-auto h-12 w-auto"
                             src="/upp.gif"

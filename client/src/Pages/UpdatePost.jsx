@@ -49,7 +49,6 @@ export default function UpdatePost() {
         const formData = new FormData();
         postData.body = postData.body.replaceAll("'", '"');
         formData.append("file", file);
-        console.log(file)
         formData.append("title", postData.title);
 
         formData.append("body", postData.body);
@@ -72,7 +71,7 @@ export default function UpdatePost() {
             );
             setIsLoading(false);
 
-            history.push(`/posts/${postId}`);
+            history.push(`/posts/${postId}`, {update: "success"});
         } catch (err) {
             setIsLoading(false);
             setErrors(err.response.data.errors);
@@ -82,14 +81,14 @@ export default function UpdatePost() {
 
     useEffect(() => {
         if (postId !== -1) {
-            console.log(postId);
+
             PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
                     setPost(data[0]);
                     setPostData(data[0])
                 })
                 .catch((reason) => {
-                    console.log(reason);
+
                 });
         }
     }, [postId]);
