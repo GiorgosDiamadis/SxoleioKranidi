@@ -9,10 +9,10 @@ const path = require("path")
 
 
 const fileUpload = require("express-fileupload");
-// var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
-//
-//
-// process.stdout.write = process.stderr.write = access.write.bind(access);
+var access = fs.createWriteStream(__dirname + '/node.access.log', {flags: 'a'})
+
+
+process.stdout.write = process.stderr.write = access.write.bind(access);
 const db = require("./db");
 
 
