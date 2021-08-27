@@ -39,7 +39,7 @@ export default function Home() {
             <Navbar/>
             <Toast ref={toast} position={"top-center"}/>
             <header className="showcase text-white">
-                <div className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
+                <div data-aos={"fade"} className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
                     <img src="upp.gif" className="logo m-auto w-32 h-32 lg:w-48 lg:h-48" alt=""/>
                     <div className="text-2xl lg:text-4xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
@@ -53,6 +53,7 @@ export default function Home() {
                         <div
                             className="w-full md:w-4/12 ml-auto mr-auto"
                             style={{flex: "0.9"}}
+                            data-aos={"fade"}
                         >
                             <img
                                 src="./images/233600822_872229023647728_234042590613876335_n.jpg"
@@ -62,7 +63,7 @@ export default function Home() {
                             />
                         </div>
                         <div
-
+                            data-aos={"fade"}
                             className="w-full lg:w-7/12 ml-auto mr-auto px-4"
                         >
                             <h3 className=" font-bold text-5xl text-center mt-6">
@@ -91,7 +92,7 @@ export default function Home() {
             </section>
 
             <section className="latest max-w-7xl mx-auto mt-4">
-                <h1 className={"font-bold text-5xl text-center mt-6 mb-6"}>
+                <h1 data-aos={"fade"}  className={"font-bold text-5xl text-center mt-6 mb-6"}>
                     Τελευταίες ανακοινώσεις
                 </h1>
 
@@ -100,7 +101,7 @@ export default function Home() {
                         <div
                             key={`anakoinwsi${0}`}
                         >
-                            <h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
+                            <h1 data-aos={"fade"}  className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
                         </div>
 
                     </div>
@@ -111,7 +112,7 @@ export default function Home() {
                     <div className="" >
                         <div
                             key={`anakoinwsi${0}`}
-                            // data-aos={"fade-up"}
+                            data-aos={"fade"}
                         >
 
                                 <PostCard props={latestPosts[0]}/>
@@ -125,7 +126,7 @@ export default function Home() {
                 <div className="grid grid-cols-1  md:grid-cols-2 mb-2">
                     {latestPosts && latestPosts.length > 1 &&
                     latestPosts.map((post, i) => (
-                        <div key={`anakoinwsi${i}`} data-aos={"fade-up"}>
+                        <div key={`anakoinwsi${i}`} data-aos={"fade"} >
                             <PostCard props={post}/>
                         </div>
                     ))}
@@ -133,6 +134,7 @@ export default function Home() {
                 <div
                     style={{display: "flex", justifyContent: "center"}}
                     className={"mt-5 mb-5"}
+
                 >
                     <Link to={"/posts"}>
                         <button

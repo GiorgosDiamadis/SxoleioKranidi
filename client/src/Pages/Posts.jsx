@@ -97,7 +97,7 @@ export default function Posts() {
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Link to={"/posts/create"}>
                             <button
-                                // data-aos={"fade"}
+                                data-aos={"fade"}
                                 className="h-10 mr-3 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100"
                             >
 
@@ -108,17 +108,17 @@ export default function Posts() {
                     </div>
                 )}
                 <h1
-                    // data-aos={"zoom-out"}
+                    data-aos={"fade"}
                     className={"text-gray-600 font-bold text-3xl text-center mt-6 mb-6"}
                 >
                     Ανακοινώσεις
                 </h1>
 
                 <h2
-                    // data-aos={"zoom-out"}
+                    data-aos={"fade"}
                     className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
                 <div
-                    // data-aos={"zoom-out"}
+                    data-aos={"fade"}
                     className=" flex flex-row justify-center  p-mb-5 p-5">
                     <Dropdown value={currentMonth} className={"bloc"} onChange={(e) => {
                         setCurrentMonth(e.value)
@@ -134,7 +134,7 @@ export default function Posts() {
                     <div className=" mb-2">
                         <div
                             key={`anakoinwsi${0}`}
-                            // data-aos={"zoom-out"}
+                            data-aos={"fade"}
                         >
                             {currentMonth && currentYear && (<h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις για {currentMonth.name} - {currentYear.name}</h1>)}
 
@@ -152,7 +152,7 @@ export default function Posts() {
                     <div className="mb-2" >
                         <div
                             key={`anakoinwsi${0}`}
-                            // data-aos={"fade-up"}
+                            data-aos={"fade"}
                         >
 
                             <PostCard props={allPosts[currentYear.name][currentMonth.name][0]}/>
@@ -171,7 +171,7 @@ export default function Posts() {
 
                         <div
                             key={`anakoinwsi - ${k} - ${currentYear.name} - ${currentMonth.name}`}
-                            // data-aos={k % 2 === 0 ? "fade-right" : "fade-left"}
+                            data-aos={"fade"}
                         >
                             <PostCard props={post}/>
                         </div>

@@ -45,12 +45,12 @@ export default function Contact() {
             <Spinner props={{isLoading}}/>
             <Toast ref={toast} position={"top-center"}/>
             <h3
-                // data-aos={"zoom-out"}
+                data-aos={"fade"}
                 className="block mt-32 font-bold text-5xl text-center">
                 Επικοινωνία
             </h3>
             <div style={{boxShadow: "0 20px 30px rgba(0, 0, 0, 0.35)"}}
-                 // data-aos={"zoom-out"}
+                 data-aos={"fade"}
                  className={"mt-8 lg:mt-0 m-auto flex flex-col justify-center lg:flex-row items-center rounded-2xl p-2 mb-32"}>
 
                 <div>

@@ -54,43 +54,35 @@ export default function Post() {
             <Toast ref={toast} position={"top-center"}/>
             {post && (
                 <main className="max-w-6xl mx-auto mt-32 mt-32 space-y-6">
-                    <article className="max-w-4xl mx-auto grid grid-cols-12 gap-x-10 p-3">
-                        <div className="col-span-4 text-center pt-14 mb-10">
-                            <div data-aos={"zoom-out"} dangerouslySetInnerHTML={{__html: post.imgURL}}
-                                 className={"rounded-xl"}>
+                    <div className="fixed left-0 w-36 h-36 col-span-4 text-center pt-14 mb-10">
+                        <div data-aos={"fade"}  dangerouslySetInnerHTML={{__html: post.imgURL}}
+                             className={"rounded-xl"}>
 
 
-                            </div>
-
-                            <p data-aos={"zoom-out"} className="mt-4 block text-gray-400 text-xs">
-                                Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
-                            </p>
-
-                            <div data-aos={"zoom-out"} className="flex items-center justify-center text-sm mt-4">
-                                <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
-                                <div className="ml-3 text-left">
-                                    <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
-                                </div>
-                            </div>
                         </div>
 
-                        <div className="col-span-8">
-                            <div data-aos={"zoom-out"} className="flex justify-between mb-6">
-                                <Link to={"/posts"}>
-                                    <button
-                                        className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">
-                                        Πίσω στις ανακοινώσεις
-                                    </button>
-                                </Link>
-                            </div>
+                        <p data-aos={"fade"}  className="mt-4 block text-gray-400 text-xs">
+                            Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
+                        </p>
 
-                            <h1 data-aos={"zoom-out"} className="font-bold text-xl sm:text-4xl mb-10">
+                        <div data-aos={"fade"}  className="flex items-center justify-center text-sm mt-4">
+                            <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
+                            <div className="ml-3 text-left">
+                                <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <article className="max-w-4xl pl-36 mx-auto p-3">
+
+                        <div className="col-span-8 pl-3 pt-4">
+                            <h1 data-aos={"fade"}  className="font-bold text-xl sm:text-4xl mb-6">
                                 {post.title}
                             </h1>
-
+                            <hr/>
                             <div
-                                data-aos={"zoom-out"}
-                                className="space-y-4 lg:text-lg leading-loose"
+                                data-aos={"fade"}
+                                className="space-y-4 text-lg leading-loose"
                                 style={{overflowWrap: "anywhere"}}
                                 dangerouslySetInnerHTML={{__html: post.body}}
                             >

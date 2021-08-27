@@ -113,3 +113,6 @@ authorization Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2
   name: [32m'Error'[39m,
   http_code: [33m400[39m
 }
+[36;1mbody-parser[22;39m [33;1mdeprecated[22;39m [0mundefined extended: provide extended option[39m [36mapp.js:39:17[39m
+Serving on port 8080
+authorization undefined
