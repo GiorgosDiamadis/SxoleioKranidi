@@ -40,16 +40,18 @@ export default function Contact() {
     const toast = useRef(null);
 
     return (
-        <div className={"flex flex-col h-screen justify-between"}>
+        <div className={"flex flex-col h-screen justify-between"} style={{overflowX:"hidden"}}>
             <Navbar/>
             <Spinner props={{isLoading}}/>
             <Toast ref={toast} position={"top-center"}/>
-            <h3 data-aos={"zoom-out"} className="hidden md:block mt-32 font-bold text-5xl text-center">
+            <h3
+                // data-aos={"zoom-out"}
+                className="block mt-32 font-bold text-5xl text-center">
                 Επικοινωνία
             </h3>
             <div style={{boxShadow: "0 20px 30px rgba(0, 0, 0, 0.35)"}}
-                 data-aos={"zoom-out"}
-                 className={"mt-32 lg:mt-0 m-auto flex flex-col justify-center lg:flex-row items-center rounded-2xl p-6 mb-32"}>
+                 // data-aos={"zoom-out"}
+                 className={"mt-8 lg:mt-0 m-auto flex flex-col justify-center lg:flex-row items-center rounded-2xl p-2 mb-32"}>
 
                 <div>
                     <iframe

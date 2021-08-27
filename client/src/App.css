@@ -47,7 +47,7 @@ code {
 
 }
 
-.date-line-h2{
+.date-line-h2 {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid #000;
@@ -56,33 +56,33 @@ code {
 }
 
 .date-line-span {
-    background:#fff;
-    padding:0 10px;
+    background: #fff;
+    padding: 0 10px;
 }
 
 
 .content {
     position: absolute;
     z-index: 1;
-    top: 20%;
-    left: 50%;
-    margin-top: 50px;
-    margin-left: -175px;
-    width: 370px;
-    height: 350px;
-    text-align: center;
-    transition: all 1000ms;
+    /*top: 20%;*/
+    /*left: 50%;*/
+    /*margin-top: 50px;*/
+    /*margin-left: -175px;*/
+    /*width: 370px;*/
+    /*height: 350px;*/
+    /*text-align: center;*/
+    /*transition: all 1000ms;*/
 }
 
-.content > div, .logo-text{
+.content > div, .logo-text {
     font-family: 'EB Garamond', serif;
     font-style: italic;
 }
 
 .content .logo {
-    height: 180px;
-    width: 180px;
-    margin: auto;
+    /*height: 180px;*/
+    /*width: 180px;*/
+    /*margin: auto;*/
 }
 
 .nav-link {
@@ -202,14 +202,13 @@ nav {
 }
 
 
-
 .loader {
     border-top-color: #3498db;
     -webkit-animation: spinner 1.5s linear infinite;
     animation: spinner 1.5s linear infinite;
 }
 
-.footer-distributed{
+.footer-distributed {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -221,23 +220,19 @@ nav {
 
 @media (max-width: 640px) {
     .showcase::after {
-        height: 50vh;
+        height: 70vh;
     }
 
-    .content {
-        top: 5%;
-        margin-top: 5px;
-    }
-
-    .content .logo {
-        height: 140px;
-        width: 140px;
-    }
-
-    .content .text {
-        display: none;
+}
+@layer utilities {
+    @variants responsive {
+        .card-one{
+            width:600px;
+            margin:auto;
+        }
     }
 }
+
 
 @-webkit-keyframes spinner {
     0% {

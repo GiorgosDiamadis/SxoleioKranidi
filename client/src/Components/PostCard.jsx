@@ -28,7 +28,7 @@ export default function PostCard({props}) {
             <Spinner props={{isLoading}}/>
             <article
 
-                className={`border-2 ${isDeleted ? "invisible" : ""} m-1 border-gray-200 scale-100 transform transition duration-500 hover:bg-blue-200 rounded-xl`}>
+                className={`border-2 ${isDeleted ? "invisible" : ""} sm:w-cardOne m-auto m-1 border-gray-200 scale-100 transform transition duration-500 hover:bg-blue-200 rounded-xl`}>
                 {user && (
                     <div
                         style={{display: "flex", justifyContent: "center"}}

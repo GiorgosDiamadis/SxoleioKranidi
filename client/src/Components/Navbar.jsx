@@ -19,7 +19,7 @@ export default function Navbar() {
                             </a>
                         </div>
 
-                        <div className="hidden md:flex items-center space-x-1">
+                        <div className="hidden lg:flex items-center space-x-1">
                             <Link to={"/"}
                                   className={`py-4 px-2 ${history.location.pathname === "/" ? "text-blue-300" : "text-white "} hover:text-blue-300 ${history.location.pathname === "/" ? "border-b-4 border-blue-300" : ""} `}>
                                 Αρχική
@@ -37,7 +37,7 @@ export default function Navbar() {
                     </div>
 
 
-                    <div className="hidden md:flex items-center space-x-3 ">
+                    <div className="hidden lg:flex items-center space-x-3 ">
                         {auth.user === null ? (
                             <Link to={"/login"}
                                   className={`py-4 px-2 ${history.location.pathname === "/login" ? "text-blue-300" : "text-white "} hover:text-blue-300 ${history.location.pathname === "/login" ? "border-b-4 border-blue-300" : ""} `}>
@@ -51,7 +51,7 @@ export default function Navbar() {
                         )}
                     </div>
 
-                    <div className="md:hidden flex items-center">
+                    <div className="lg:hidden flex items-center">
                         <button className="outline-none mobile-menu-button"
                                 onClick={() => {
                                     let menu = document.getElementById("menu");

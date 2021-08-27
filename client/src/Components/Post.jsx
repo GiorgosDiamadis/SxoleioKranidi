@@ -54,7 +54,7 @@ export default function Post() {
             <Toast ref={toast} position={"top-center"}/>
             {post && (
                 <main className="max-w-6xl mx-auto mt-32 mt-32 space-y-6">
-                    <article className="max-w-4xl mx-auto grid grid-cols-12 gap-x-10 border-2 border-gray-150 rounded-xl p-3">
+                    <article className="max-w-4xl mx-auto grid grid-cols-12 gap-x-10 p-3">
                         <div className="col-span-4 text-center pt-14 mb-10">
                             <div data-aos={"zoom-out"} dangerouslySetInnerHTML={{__html: post.imgURL}}
                                  className={"rounded-xl"}>
