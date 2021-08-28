@@ -14,6 +14,7 @@ import Post from "./Components/Post";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Contact from "./Pages/Contact";
 import UpdatePost from "./Pages/UpdatePost";
+import NotFound from "./Pages/NotFound";
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                     <Route exact path={"/contact"}>
                         <Contact/>
                     </Route>
+                    <Route path="" component={NotFound} />
                 </Switch>
             </ScrollToTop>
         </Router>

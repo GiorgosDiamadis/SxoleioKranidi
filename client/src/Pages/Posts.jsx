@@ -109,7 +109,7 @@ export default function Posts() {
                 )}
                 <h1
                     data-aos={"fade"}
-                    className={"text-gray-600 font-bold text-3xl text-center mt-6 mb-6"}
+                    className={"font-bold text-5xl text-center mt-6 mb-6"}
                 >
                     Ανακοινώσεις
                 </h1>
@@ -168,11 +168,11 @@ export default function Posts() {
                     allPosts[currentYear.name][currentMonth.name] &&
                     allPosts[currentYear.name][currentMonth.name].length > 1 &&
                     allPosts[currentYear.name][currentMonth.name].map((post, k) => (
-
                         <div
                             key={`anakoinwsi - ${k} - ${currentYear.name} - ${currentMonth.name}`}
+                            style={{margin:"8px 16px 0px"}}
                             data-aos={"fade"}
-                        >
+                             className={"mt-2"} >
                             <PostCard props={post}/>
                         </div>
                     ))}

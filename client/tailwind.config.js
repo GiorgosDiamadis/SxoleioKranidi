@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             width: {
-                'cardOne': '600px',
+                'cardOne': '640px',
             }
         },
     },

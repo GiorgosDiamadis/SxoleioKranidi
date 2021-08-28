@@ -197,7 +197,7 @@ footer p {
 
 nav {
     background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.35);
 }
 

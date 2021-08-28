@@ -126,7 +126,9 @@ export default function Home() {
                 <div className="grid grid-cols-1  md:grid-cols-2 mb-2">
                     {latestPosts && latestPosts.length > 1 &&
                     latestPosts.map((post, i) => (
-                        <div key={`anakoinwsi${i}`} data-aos={"fade"} >
+                        <div key={`anakoinwsi${i}`}
+                             data-aos={"fade"}
+                             className={"mt-2"} >
                             <PostCard props={post}/>
                         </div>
                     ))}

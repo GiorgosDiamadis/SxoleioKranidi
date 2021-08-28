@@ -6,10 +6,12 @@ import React, {useState, useEffect, useRef} from "react";
 import PostRequest from "../PostRequest";
 import {Toast} from "primereact/toast";
 import {useHistory} from "react-router";
+import Spinner from "./Spinner";
 
 
 export default function Post() {
     const [postId, setPostId] = useState(useParams().post_id);
+    const [isLoading,setIsloading] = useState(false)
     const [post, setPost] = useState(null);
     const toast = useRef(null);
     const history = useHistory();
@@ -37,13 +39,18 @@ export default function Post() {
                     state: {}
                 });
             }
+            setIsloading(true);
             PostRequest("/posts/get", {post_id: postId})
                 .then(({data}) => {
+                    if(data.length === 0){
+                        history.push("/")
+                    }
                     setPost(data[0]);
+                    setIsloading(false);
 
                 })
                 .catch((reason) => {
-
+                    console.log(reason)
                 });
         }
     }, [postId]);
@@ -52,38 +59,80 @@ export default function Post() {
         <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
             <Toast ref={toast} position={"top-center"}/>
+            <Spinner props={{isLoading}}/>
+
             {post && (
-                <main className="max-w-6xl mx-auto mt-32 mt-32 space-y-6">
-                    <div className="fixed left-0 w-36 h-36 col-span-4 text-center pt-14 mb-10">
-                        <div data-aos={"fade"}  dangerouslySetInnerHTML={{__html: post.imgURL}}
-                             className={"rounded-xl"}>
-
-
-                        </div>
-
-                        <p data-aos={"fade"}  className="mt-4 block text-gray-400 text-xs">
-                            Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
-                        </p>
-
-                        <div data-aos={"fade"}  className="flex items-center justify-center text-sm mt-4">
-                            <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
-                            <div className="ml-3 text-left">
-                                <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
-                            </div>
-                        </div>
+                <main className="max-w-6xl mx-auto mt-32 space-y-6">
+                    <div className={"m-auto text-center"}>
+                        <Link to={"/posts"}>
+                            <button
+                                className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">
+                                Ολες οι ανακοινώσεις
+                            </button>
+                        </Link>
                     </div>
 
-                    <article className="max-w-4xl pl-36 mx-auto p-3">
 
-                        <div className="col-span-8 pl-3 pt-4">
-                            <h1 data-aos={"fade"}  className="font-bold text-xl sm:text-4xl mb-6">
+                    <article className="md:hidden w-full mx-auto p-3">
+                        <div className="float-left mr-2 w-36 h-36 sm:w-44 sm:h-44 col-span-4 text-center pt-14 mb-10">
+                            <div data-aos={"fade"}  dangerouslySetInnerHTML={{__html: post.imgURL}}
+                                 className={"rounded-xl"}>
+                            </div>
+
+                            <p data-aos={"fade"}  className="block text-gray-400 text-xs">
+                                Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
+                            </p>
+                            <div data-aos={"fade"}  className="flex items-center justify-center text-sm">
+                                <img src="/upp.gif" className={"w-8 h-8"} alt="Lary avatar"/>
+                                <div className="ml-3 text-left">
+                                    <h5 className="font-bold text-xs">Διεύθυνση Σχολείου</h5>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-span-8 pl-3 pt-12">
+                            <h1 data-aos={"fade"}  className="font-bold text-xl  mb-6">
+                                {post.title}
+                            </h1>
+
+                            <div
+                                data-aos={"fade"}
+                                className="space-y-4 text-lg leading-loose"
+                                style={{overflowWrap: "anywhere"}}
+                                dangerouslySetInnerHTML={{__html: post.body}}
+                            >
+
+                            </div>
+                        </div>
+                    </article>
+                    <article className={"hidden md:flex w-full flex-row"}>
+                        <div className="w-96 h-96 text-center pt-14 mb-10">
+                            <div data-aos={"fade"}  dangerouslySetInnerHTML={{__html: post.imgURL}}
+                                 className={"rounded-xl"}>
+                            </div>
+
+                            <p data-aos={"fade"}  className="mt-4 block text-gray-400 text-xs">
+                                Δημοσιεύτηκε στις <time>{moment(post.publishedAt).format("DD-MM-YYYY")}</time>
+                            </p>
+                            <div data-aos={"fade"}  className="flex items-center justify-center text-sm mt-4">
+                                <img src="/upp.gif" className={"w-10 h-10"} alt="Lary avatar"/>
+                                <div className="ml-3 text-left">
+                                    <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div className="pl-3 pt-12">
+                            <h1 data-aos={"fade"}  className="font-bold text-4xl mb-6">
                                 {post.title}
                             </h1>
                             <hr/>
                             <div
                                 data-aos={"fade"}
-                                className="space-y-4 text-lg leading-loose"
-                                style={{overflowWrap: "anywhere"}}
+                                className="text-lg leading-loose"
+
+                                style={{width:"800px"}}
                                 dangerouslySetInnerHTML={{__html: post.body}}
                             >
 
