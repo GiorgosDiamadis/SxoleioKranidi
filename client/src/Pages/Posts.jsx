@@ -8,6 +8,7 @@ import Footer from "../Components/Footer";
 import moment from "moment";
 import {Dropdown} from "primereact/dropdown";
 import PostRequest from "../PostRequest";
+import Spinner from "../Components/Spinner";
 
 
 export default function Posts() {
@@ -17,6 +18,7 @@ export default function Posts() {
     const [currentYear, setCurrentYear] = useState(null);
     const [months] = useState(['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάϊος', 'Ιούνιος', 'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος']);
 
+    const [isLoading,setIsLoading] = useState(false)
 
     const monthOptions = [
         {name: 'Ιανουάριος'},
@@ -57,12 +59,14 @@ export default function Posts() {
         if (currentMonth === null || currentYear === null)
             return
 
+        setIsLoading(true);
         PostRequest("/posts").then(({data}) => {
 
             data = data.sort(function (a, b) {
                 return (a.publishedAt < b.publishedAt) ? 0 : ((a.publishedAt > b.publishedAt) ? -1 : 0);
             });
 
+            setIsLoading(false);
 
             let chunks = {}
 
@@ -84,6 +88,8 @@ export default function Posts() {
 
             }
             setPosts(chunks);
+        }).catch((reason)=>{
+            setIsLoading(false)
         });
     }, [currentMonth, currentYear]);
 
@@ -91,13 +97,14 @@ export default function Posts() {
     return (
         <div className={"flex flex-col h-screen justify-between"}>
             <Navbar/>
+            <Spinner props={{isLoading}}/>
 
             <section className="latest max-w-7xl mx-auto mt-24">
                 {user && (
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Link to={"/posts/create"}>
                             <button
-                                data-aos={"fade"}
+                                data-aos={"zoom-in"}
                                 className="h-10 mr-3 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100"
                             >
 
@@ -108,17 +115,17 @@ export default function Posts() {
                     </div>
                 )}
                 <h1
-                    data-aos={"fade"}
+                    data-aos={"zoom-in"}
                     className={"font-bold text-5xl text-center mt-6 mb-6"}
                 >
                     Ανακοινώσεις
                 </h1>
 
                 <h2
-                    data-aos={"fade"}
+                    data-aos={"zoom-in"}
                     className={"text-gray-600 font-bold text-xl text-center mt-6 mb-2"}>Ημερομηνία</h2>
                 <div
-                    data-aos={"fade"}
+                    data-aos={"zoom-in"}
                     className=" flex flex-row justify-center  p-mb-5 p-5">
                     <Dropdown value={currentMonth} className={"bloc"} onChange={(e) => {
                         setCurrentMonth(e.value)
@@ -134,9 +141,9 @@ export default function Posts() {
                     <div className=" mb-2">
                         <div
                             key={`anakoinwsi${0}`}
-                            data-aos={"fade"}
+                            data-aos={"zoom-in"}
                         >
-                            {currentMonth && currentYear && (<h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις για {currentMonth.name} - {currentYear.name}</h1>)}
+                            {currentMonth && currentYear && !isLoading && (<h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις για {currentMonth.name} - {currentYear.name}</h1>)}
 
                         </div>
 
@@ -152,7 +159,7 @@ export default function Posts() {
                     <div className="mb-2" >
                         <div
                             key={`anakoinwsi${0}`}
-                            data-aos={"fade"}
+                            data-aos={"zoom-in"}
                         >
 
                             <PostCard props={allPosts[currentYear.name][currentMonth.name][0]}/>
@@ -171,7 +178,7 @@ export default function Posts() {
                         <div
                             key={`anakoinwsi - ${k} - ${currentYear.name} - ${currentMonth.name}`}
                             style={{margin:"8px 16px 0px"}}
-                            data-aos={"fade"}
+                            data-aos={"zoom-in"}
                              className={"mt-2"} >
                             <PostCard props={post}/>
                         </div>

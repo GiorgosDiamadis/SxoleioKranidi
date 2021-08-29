@@ -8,11 +8,13 @@ import Footer from "../Components/Footer";
 import PostRequest from "../PostRequest";
 import {useHistory} from "react-router";
 import {Toast} from "primereact/toast";
+import Spinner from "../Components/Spinner";
 
 
 export default function Home() {
     const {user} = useContext(AuthContext);
     const [latestPosts, setLatestPosts] = useState([]);
+    const [isLoading,setIsLoading] = useState(false)
     const history = useHistory();
     const toast = useRef(null);
 
@@ -25,11 +27,14 @@ export default function Home() {
             });
             history.replace('', null);
         }
+        setIsLoading(true)
         PostRequest("/posts", {amount: 2})
             .then(({data}) => {
+                setIsLoading(false)
                 setLatestPosts(data);
             })
             .catch((reason) => {
+                setIsLoading(false)
 
             });
     }, []);
@@ -39,7 +44,7 @@ export default function Home() {
             <Navbar/>
             <Toast ref={toast} position={"top-center"}/>
             <header className="showcase text-white">
-                <div data-aos={"fade"} className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
+                <div data-aos={"zoom-in"} className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
                     <img src="upp.gif" className="logo m-auto w-32 h-32 lg:w-48 lg:h-48" alt=""/>
                     <div className="text-2xl lg:text-4xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
@@ -51,25 +56,25 @@ export default function Home() {
                 <div className="">
                     <div className="items-center flex flex-wrap">
                         <div
+                            data-aos={"zoom-in"}
                             className="w-full md:w-4/12 ml-auto mr-auto"
                             style={{flex: "0.9"}}
-                            data-aos={"fade"}
                         >
                             <img
                                 src="./images/233600822_872229023647728_234042590613876335_n.jpg"
                                 alt=""
-                                className="max-w-full rounded-lg shadow-lg"
+                                className=" max-w-full rounded-lg shadow-lg"
                                 style={{width: "510px", height: "400px"}}
                             />
                         </div>
                         <div
-                            data-aos={"fade"}
+                            data-aos={"zoom-in"}
                             className="w-full lg:w-7/12 ml-auto mr-auto px-4"
                         >
-                            <h3 className=" font-bold text-5xl text-center mt-6">
+                            <h3 className="font-bold text-5xl text-center mt-6">
                                 Καλώς Ορίσατε
                             </h3>
-                            <p className="mt-4 text-lg leading-loose">
+                            <p className=" mt-4 text-lg leading-loose">
                                 Σας καλωσοριζουμε στην ιστοσελίδα του 1ου Δημοτικού Σχολείου
                                 Κρανιδίου. Το σχολείο μας είναι 12/θεσιο και αποτελείται από 2
                                 κτήρια. Το παλαιό κτήριο είναι χτισμένο το 1931. Στην ιστοσελίδα
@@ -91,17 +96,25 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="latest max-w-7xl mx-auto mt-4">
-                <h1 data-aos={"fade"}  className={"font-bold text-5xl text-center mt-6 mb-6"}>
+            <section
+
+                className="
+            latest max-w-7xl mx-auto mt-4">
+                <h1
+                    data-aos={"zoom-in"}
+                    className={"font-bold text-5xl text-center mt-6 mb-6"}>
                     Τελευταίες ανακοινώσεις
                 </h1>
+
+                <Spinner props={{isLoading}}/>
 
                 {latestPosts && latestPosts.length === 0 && (
                     <div className="sm:grid sm:grid-cols-1">
                         <div
                             key={`anakoinwsi${0}`}
+                            data-aos={"zoom-in"}
                         >
-                            <h1 data-aos={"fade"}  className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
+                            <h1 className={"text-2xl text-center"}>Δεν υπάρχουν ανακοινώσεις</h1>
                         </div>
 
                     </div>
@@ -112,9 +125,9 @@ export default function Home() {
                     <div className="" >
                         <div
                             key={`anakoinwsi${0}`}
-                            data-aos={"fade"}
-                        >
+                            data-aos={"zoom-in"}
 
+                        >
                                 <PostCard props={latestPosts[0]}/>
 
                         </div>
@@ -127,7 +140,8 @@ export default function Home() {
                     {latestPosts && latestPosts.length > 1 &&
                     latestPosts.map((post, i) => (
                         <div key={`anakoinwsi${i}`}
-                             data-aos={"fade"}
+
+                            data-aos={"zoom-in-up"}
                              className={"mt-2"} >
                             <PostCard props={post}/>
                         </div>

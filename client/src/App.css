@@ -201,12 +201,23 @@ nav {
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.35);
 }
 
-
 .loader {
     border-top-color: #3498db;
     -webkit-animation: spinner 1.5s linear infinite;
     animation: spinner 1.5s linear infinite;
 }
+
+@-webkit-keyframes spinner {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 
 .footer-distributed {
     display: flex;
@@ -234,23 +245,7 @@ nav {
 }
 
 
-@-webkit-keyframes spinner {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
 
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 @media only screen and (max-width: 1200px) {
     .login-register-card {
