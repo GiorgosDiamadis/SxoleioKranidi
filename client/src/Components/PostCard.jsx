@@ -27,30 +27,30 @@ export default function PostCard({props}) {
         <>
             <Spinner props={{isLoading}}/>
             <article
-                style={{maxWidth:"600px"}}
-                className={`border-2 ${isDeleted ? "invisible" : ""} xl:w-cardOne m-auto  border-gray-200 scale-100 transform transition duration-500 hover:bg-blue-200 rounded-xl`}>
-                {user && (
-                    <div
-                        style={{display: "flex", justifyContent: "center"}}
-                        className={" absolute"}
-                    >
-                        <Link to={`/posts/update/${props.post_id}`}>
-                            <button
-                                className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
-                                Επεξεργασία
-                            </button>
-                        </Link>
+                style={{maxWidth: "600px", boxShadow: "0px 0px 15px 0px rgba(0, 0, 0, .3)"}}
+                className={`${isDeleted ? "invisible" : ""} xl:w-cardOne m-auto bg-gray-200 scale-100 transform transition duration-500 hover:bg-blue-200 rounded-md`}>
 
-                        <button
-                            onClick={deletePost}
-                            className="h-10 px-5 m-2 text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
-                            Διαγραφή
-                        </button>
-                    </div>
-                )}
 
                 <div className="py-6 px-5">
-                    <div dangerouslySetInnerHTML={{__html: props.imgURL}}>
+                    <div className="flex justify-between mb-4 items-center">
+                        <div className="flex items-center text-sm">
+                            <img src="./upp.gif" className={"w-10 h-10"}/>
+                            <div className="ml-3">
+                                <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
+                            </div>
+                        </div>
+
+                        <div>
+                            <Link
+                                to={`/posts/${props.post_id}`}
+                                className="transition-colors duration-300 text-xs font-semibold rounded-full py-2 px-8 hover:underline "
+                            >
+                                Περισσότερα
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div  dangerouslySetInnerHTML={{__html: props.imgURL}}>
 
                     </div>
 
@@ -77,26 +77,27 @@ export default function PostCard({props}) {
                         >
 
                         </div>
-
-                        <div className="flex justify-between items-center">
-                            <div className="flex items-center text-sm">
-                                <img src="./upp.gif" className={"w-10 h-10"}/>
-                                <div className="ml-3">
-                                    <h5 className="font-bold">Διεύθυνση Σχολείου</h5>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Link
-                                    to={`/posts/${props.post_id}`}
-                                    className="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
-                                >
-                                    Περισσότερα
-                                </Link>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
+                {user && (
+                    <div
+                        style={{display: "flex", justifyContent:"space-between"}}
+                    >
+                        <Link to={`/posts/update/${props.post_id}`}>
+                            <button
+                                className="h-7 px-3 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-md focus:shadow-outline hover:bg-blue-700">
+                                Επεξεργασία
+                            </button>
+                        </Link>
+
+                        <button
+                            onClick={deletePost}
+                            className="h-7 px-3 m-2 text-red-700 transition-colors duration-150  rounded-md focus:shadow-outline hover:bg-red-700 hover:text-white">
+                            Διαγραφή
+                        </button>
+                    </div>
+                )}
             </article>
         </>
 

@@ -74,7 +74,7 @@ code {
     /*transition: all 1000ms;*/
 }
 
-.content > div, .logo-text {
+.content > h1, .logo-text {
     font-family: 'EB Garamond', serif;
     font-style: italic;
 }

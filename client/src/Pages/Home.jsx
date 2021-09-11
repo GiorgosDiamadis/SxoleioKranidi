@@ -14,7 +14,7 @@ import Spinner from "../Components/Spinner";
 export default function Home() {
     const {user} = useContext(AuthContext);
     const [latestPosts, setLatestPosts] = useState([]);
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
     const toast = useRef(null);
 
@@ -44,11 +44,12 @@ export default function Home() {
             <Navbar/>
             <Toast ref={toast} position={"top-center"}/>
             <header className="showcase text-white">
-                <div data-aos={"zoom-in"} className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
+                <div data-aos={"zoom-in"}
+                     className="content flex flex-col ml-auto mr-auto left-0 right-0 text-center top-24  sm:top-1/3">
                     <img src="upp.gif" className="logo m-auto w-32 h-32 lg:w-48 lg:h-48" alt=""/>
-                    <div className="text-2xl lg:text-4xl mt-10 leading-tight">
+                    <h1 className="text-2xl lg:text-4xl mt-10 leading-tight">
                         1ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΡΑΝΙΔΙΟΥ
-                    </div>
+                    </h1>
                 </div>
             </header>
 
@@ -122,13 +123,14 @@ export default function Home() {
 
                 {latestPosts && latestPosts.length === 1 && (
 
-                    <div className="" >
+                    <div className="">
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"zoom-in"}
+                            style={{margin:"8px 16px 0px"}}
 
                         >
-                                <PostCard props={latestPosts[0]}/>
+                            <PostCard props={latestPosts[0]}/>
 
                         </div>
 
@@ -141,8 +143,9 @@ export default function Home() {
                     latestPosts.map((post, i) => (
                         <div key={`anakoinwsi${i}`}
 
-                            data-aos={"zoom-in-up"}
-                             className={"mt-2"} >
+                             data-aos={"zoom-in-up"}
+                             style={{margin:"8px 16px 0px"}}
+                             className={"mt-2"}>
                             <PostCard props={post}/>
                         </div>
                     ))}

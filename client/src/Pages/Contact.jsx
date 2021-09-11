@@ -51,10 +51,10 @@ export default function Contact() {
                 className="block mt-32 font-bold text-5xl text-center">
                 Επικοινωνία
             </h3>
-            <div style={{boxShadow: "0 20px 30px rgba(0, 0, 0, 0.35)"}}
+            <div style={{boxShadow: "0px 0px 15px 0px rgba(0, 0, 0, .3)"}}
                  data-aos={"zoom-in"}
 
-                 className={"mt-8 lg:mt-0 m-auto flex flex-col justify-center lg:flex-row items-center rounded-2xl p-2 mb-32"}>
+                 className={"bg-gray-200 mt-8 lg:mt-16 m-auto flex flex-col justify-center lg:flex-row items-center rounded-md p-2 mb-16"}>
 
                 <div>
                     <iframe
@@ -83,7 +83,7 @@ export default function Contact() {
                                     Ονομα
                                 </label>
                                 <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                    className="appearance-none block w-full bg-gray-300 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-first-name" type="text"
                                     onChange={(e) => {
                                         setMessage((prevState) => ({
@@ -99,7 +99,7 @@ export default function Contact() {
                                     Επώνυμο
                                 </label>
                                 <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    className="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="text"
                                     onChange={(e) => {
                                         setMessage((prevState) => ({
@@ -117,7 +117,7 @@ export default function Contact() {
                                     Email
                                 </label>
                                 <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    className="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password" type="email"
                                     onChange={(e) => {
                                         setMessage((prevState) => ({

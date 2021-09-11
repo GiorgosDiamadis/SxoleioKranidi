@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-200 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
+        <footer className="bg-gray-200 border border-black border-opacity-5 rounded-xl text-center py-10 px-10 mt-8">
             <img src="./images/lary-newsletter-icon.svg" alt="" className="mx-auto -mb-6" style={{width: "145px"}}/>
                 <h5 className="text-3xl">Ενημερωθείτε για κάθε νέα ανακοίνωση</h5>
                 <div className="mt-10">

@@ -99,7 +99,7 @@ export default function Posts() {
             <Navbar/>
             <Spinner props={{isLoading}}/>
 
-            <section className="latest max-w-7xl mx-auto mt-24">
+            <section className="latest max-w-7xl mx-auto mt-20">
                 {user && (
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Link to={"/posts/create"}>
@@ -160,7 +160,7 @@ export default function Posts() {
                         <div
                             key={`anakoinwsi${0}`}
                             data-aos={"zoom-in"}
-                        >
+                            style={{margin:"8px 16px 0px"}}>
 
                             <PostCard props={allPosts[currentYear.name][currentMonth.name][0]}/>
                         </div>
