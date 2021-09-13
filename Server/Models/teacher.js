@@ -7,6 +7,23 @@ class Teacher {
     this.gender = gender;
   }
 
+  static async getHeadMasters() {
+    let conn = await db.getConnection();
+
+    return new Promise(function (resolve, reject) {
+      conn
+        .query(`SELECT * FROM teachers where headmaster=1 or subheadmaster=1`)
+        .then((data) => {
+          conn.release();
+          resolve(data);
+        })
+        .catch((reason) => {
+          conn.release();
+          reject();
+        });
+    });
+  }
+
   static async getAll() {
     let conn = await db.getConnection();
     return new Promise(function (resolve, reject) {

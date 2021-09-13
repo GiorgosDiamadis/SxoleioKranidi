@@ -14,7 +14,9 @@ import Teacher from "../Components/Teacher";
 export default function Home() {
   const { user } = useContext(AuthContext);
   const [latestPosts, setLatestPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [teachers, setTeachers] = useState([]);
+  const [loadingTeachers, setLoadingTeachers] = useState(false);
   const history = useHistory();
   const toast = useRef(null);
 
@@ -27,15 +29,21 @@ export default function Home() {
       });
       history.replace("", null);
     }
-    setIsLoading(true);
+    setLoadingPosts(true);
     PostRequest("/posts", { amount: 2 })
       .then(({ data }) => {
-        setIsLoading(false);
+        setLoadingPosts(false);
         setLatestPosts(data);
       })
       .catch((reason) => {
-        setIsLoading(false);
+        setLoadingPosts(false);
       });
+
+    setLoadingTeachers(true);
+    PostRequest("/teacher/headmasters").then(({ data }) => {
+      setLoadingTeachers(false);
+      setTeachers(data);
+    });
   }, []);
 
   return (
@@ -101,12 +109,14 @@ export default function Home() {
       </div>
       <section id={"about"} className={"relative max-w-7xl mx-auto mt-4"}>
         <div className="items-center flex flex-wrap">
-          <Teacher name={"Βενετία Ρόζου"} specialty={"Διευθύντρια"} />
-          <Teacher
-            name={"Δημήτριος Κοντοκάλης"}
-            specialty={"Υποδιευθυντής"}
-            gender={"m"}
-          />
+          {!loadingTeachers &&
+            teachers.map((teacher) => (
+              <Teacher
+                name={teacher.name}
+                specialty={teacher.specialty}
+                gender={teacher.gender}
+              />
+            ))}
         </div>
       </section>
 
@@ -118,7 +128,7 @@ export default function Home() {
         className="
             latest max-w-7xl mx-auto mt-4"
       >
-        <Spinner props={{ isLoading }} />
+        <Spinner props={{ isLoading: loadingPosts }} />
 
         {latestPosts && latestPosts.length === 0 && (
           <div className="sm:grid sm:grid-cols-1">

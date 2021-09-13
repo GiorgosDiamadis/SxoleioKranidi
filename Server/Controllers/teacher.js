@@ -8,6 +8,10 @@ module.exports.getTeachers = catchAsync(async (req, res, next) => {
   const teachers = await Teacher.getAll();
   res.status(200).send(teachers);
 });
+module.exports.getHeadmasters = catchAsync(async (req, res, next) => {
+  const teachers = await Teacher.getHeadMasters();
+  res.status(200).send(teachers);
+});
 module.exports.saveTeacher = catchAsync(async (req, res, next) => {
   const error = validationResult(req);
 
