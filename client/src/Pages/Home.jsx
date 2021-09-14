@@ -118,6 +118,16 @@ export default function Home() {
               />
             ))}
         </div>
+        <div
+          style={{ display: "flex", justifyContent: "center" }}
+          className={"mt-5 mb-5"}
+        >
+          <Link to={"/teachers"}>
+            <button className="h-10 px-5 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100">
+              Ολοι οι εκπαιδευτικοί
+            </button>
+          </Link>
+        </div>
       </section>
 
       <div className="divider font-bold text-5xl text-center mt-20 mb-20">

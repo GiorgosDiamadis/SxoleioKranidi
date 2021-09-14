@@ -1,11 +1,11 @@
 import { Toast } from "primereact/toast";
-import { Editor } from "primereact/editor";
-import React, { useEffect, Fragment, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../Components/Navbar";
 
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Spinner from "../Components/Spinner";
+import PostRequest from "../PostRequest";
 
 export default function CreateTeacher() {
   const toast = useRef(null);
@@ -17,6 +17,8 @@ export default function CreateTeacher() {
     name: "",
     specialty: "",
     gender: "",
+    headmaster: "",
+    subheadmaster: "",
   });
 
   useEffect(() => {
@@ -40,16 +42,16 @@ export default function CreateTeacher() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    teacherData.body = teacherData.body.replaceAll("'", '"');
-    try {
-      setIsLoading(true);
-      const res = await axios.post(`/posts/create`, formData, {});
-      setIsLoading(false);
-    } catch (err) {
-      setIsLoading(false);
-      setErrors(err.response.data.errors);
-    }
+    setIsLoading(true);
+    PostRequest("/teacher/create", teacherData)
+      .then((response) => {
+        setIsLoading(false);
+        history.push("/teachers/");
+      })
+      .catch((res) => {
+        setIsLoading(false);
+        setErrors(res.response.data.errors);
+      });
   };
 
   return (
@@ -103,13 +105,13 @@ export default function CreateTeacher() {
                   onChange={(e) => {
                     setTeacherData((prevState) => ({
                       ...prevState,
-                      summary: e.target.value,
+                      specialty: e.target.value,
                     }));
                   }}
                 />
               </div>
-              <div className="mb-3 text-center">
-                <span class="text-gray-700 m-auto">Φύλο</span>
+              <div className="mb-3 text-center" style={{ marginTop: "15px" }}>
+                <span class="text-gray-700 m-auto underline">Φύλο</span>
                 <div class="mt-2">
                   <label class="inline-flex items-center">
                     <input
@@ -138,6 +140,43 @@ export default function CreateTeacher() {
                       }}
                     />
                     <span class="ml-2">Γυναίκα</span>
+                  </label>
+                </div>
+              </div>
+              <div className="mb-3 text-center" style={{ marginTop: "10px" }}>
+                <span class="text-gray-700 mt-10 underline">
+                  Διευθυντής/ρια - Υποδιευθυντής/ρια
+                </span>
+                <div class="mt-2">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      class="form-radio"
+                      name="gender"
+                      onChange={() => {
+                        setTeacherData((prevState) => ({
+                          ...prevState,
+                          headmaster: 1,
+                          subheadmaster: 0,
+                        }));
+                      }}
+                    />
+                    <span class="ml-2">Διευθυντής/Διευθύντρια</span>
+                  </label>
+                  <label class="inline-flex items-center ml-6">
+                    <input
+                      type="radio"
+                      class="form-radio"
+                      name="gender"
+                      onChange={() => {
+                        setTeacherData((prevState) => ({
+                          ...prevState,
+                          headmaster: 0,
+                          subheadmaster: 1,
+                        }));
+                      }}
+                    />
+                    <span class="ml-2">Υποδιευθυντής/Υποδιευθύντρια</span>
                   </label>
                 </div>
               </div>

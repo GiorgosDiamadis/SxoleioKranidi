@@ -20,9 +20,19 @@ module.exports.saveTeacher = catchAsync(async (req, res, next) => {
     return;
   }
 
-  const { name, specialty, gender } = req.body;
-  const teacher = new Teacher(name, specialty, gender);
+  console.log(req.body);
+
+  const { name, specialty, gender, headmaster, subheadmaster } = req.body;
+  const teacher = new Teacher(
+    name,
+    specialty,
+    gender,
+    headmaster,
+    subheadmaster
+  );
   const result = await teacher.save();
+  console.log("saving");
+  console.log(result);
   res.status(200).send("success");
 });
 module.exports.deleteTeacher = catchAsync(async (req, res, next) => {

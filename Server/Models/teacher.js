@@ -1,10 +1,12 @@
 const db = require("../db");
 
 class Teacher {
-  constructor(name, specialty, gender) {
+  constructor(name, specialty, gender, headmaster, subheadmaster) {
     this.name = name;
     this.specialty = specialty;
     this.gender = gender;
+    this.headmaster = headmaster;
+    this.subheadmaster = subheadmaster;
   }
 
   static async getHeadMasters() {
@@ -48,7 +50,9 @@ class Teacher {
           `update teachers
                  set name = '${name}',
                  specialty ='${specialty}',
-                 gender ='${gender}'
+                 gender ='${gender}',
+                 headmaster='${headmaster}',
+                 subheadmaster='${subheadmaster}'
                  where teacher_id = ${teacher_id}`
         )
         .then((data) => {
@@ -85,21 +89,19 @@ class Teacher {
   }
 
   async save() {
-    this.publishedAt = new Date().toISOString();
     var that = this;
     let conn = await db.getConnection();
-
     return new Promise(function (resolve, reject) {
       conn
         .query(
-          `insert into teachers(name,specialty,gender)
-                 values ('${that.name}', '${that.specialty}', '${that.gender}')`
+          `insert into teachers(name,specialty,gender,headmaster,subheadmaster)
+                 values ('${that.name}', '${that.specialty}', '${that.gender}','${that.headmaster}','${that.subheadmaster}')`
         )
         .then((data) => {
           conn.release();
           resolve(data.insertId);
         })
-        .catch(() => {
+        .catch((reason) => {
           conn.release();
           reject();
         });

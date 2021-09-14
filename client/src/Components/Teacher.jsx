@@ -9,14 +9,14 @@ export default function Teacher({ name, specialty, gender }) {
       <div className="relative mb-6">
         <img
           className="w-full"
-          src={`${gender === "m" ? "/male.png" : "/female.png"} `}
+          src={`${gender === "male" ? "/male.png" : "/female.png"} `}
           alt="Profile picture"
         />
         <div className="text-center absolute w-full">
           <h1 className="text-black tracking-wide uppercase text-lg font-bold">
             {name}
           </h1>
-          <p className="text-gray-400 text-sm">{specialty}</p>
+          <p className="text-black text-sm">{specialty}</p>
         </div>
       </div>
     </div>

@@ -8,10 +8,6 @@ module.exports.saveValidation = checkSchema({
       errorMessage: "Το όνομα είναι κενό!",
     },
   },
-  teacher_id: {
-    in: ["body"],
-    isInt: true,
-  },
   specialty: {
     in: ["body"],
     isLength: {
