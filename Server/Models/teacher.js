@@ -9,6 +9,21 @@ class Teacher {
     this.subheadmaster = subheadmaster;
   }
 
+  static async get(id) {
+    let conn = await db.getConnection();
+    return new Promise(function (resolve, reject) {
+      conn
+        .query(`SELECT * FROM teachers where teacher_id=${id}`)
+        .then((data) => {
+          conn.release();
+          resolve(data);
+        })
+        .catch(() => {
+          conn.release();
+          reject();
+        });
+    });
+  }
   static async getHeadMasters() {
     let conn = await db.getConnection();
 
@@ -41,7 +56,14 @@ class Teacher {
         });
     });
   }
-  static async update(name, specialty, gender, teacher_id) {
+  static async update(
+    name,
+    specialty,
+    gender,
+    headmaster,
+    subheadmaster,
+    teacher_id
+  ) {
     let conn = await db.getConnection();
 
     return new Promise(function (resolve, reject) {
@@ -102,6 +124,7 @@ class Teacher {
           resolve(data.insertId);
         })
         .catch((reason) => {
+          console.log(reason);
           conn.release();
           reject();
         });

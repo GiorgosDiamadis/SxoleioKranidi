@@ -17,8 +17,8 @@ export default function CreateTeacher() {
     name: "",
     specialty: "",
     gender: "",
-    headmaster: "",
-    subheadmaster: "",
+    headmaster: 0,
+    subheadmaster: 0,
   });
 
   useEffect(() => {
@@ -118,6 +118,7 @@ export default function CreateTeacher() {
                       type="radio"
                       class="form-radio"
                       name="gender"
+                      id="asnwer1"
                       onChange={() => {
                         setTeacherData((prevState) => ({
                           ...prevState,
@@ -132,6 +133,7 @@ export default function CreateTeacher() {
                       type="radio"
                       class="form-radio"
                       name="gender"
+                      id="asnwer2"
                       onChange={() => {
                         setTeacherData((prevState) => ({
                           ...prevState,
@@ -152,7 +154,8 @@ export default function CreateTeacher() {
                     <input
                       type="radio"
                       class="form-radio"
-                      name="gender"
+                      name="headmaster"
+                      id="asnwer3"
                       onChange={() => {
                         setTeacherData((prevState) => ({
                           ...prevState,
@@ -167,7 +170,8 @@ export default function CreateTeacher() {
                     <input
                       type="radio"
                       class="form-radio"
-                      name="gender"
+                      name="headmaster"
+                      id="asnwer3"
                       onChange={() => {
                         setTeacherData((prevState) => ({
                           ...prevState,

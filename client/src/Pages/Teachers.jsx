@@ -9,13 +9,13 @@ import { AuthContext } from "../useAuth";
 
 export default function Teachers() {
   const [loading, isLoading] = useState(false);
-  const user = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [teachers, setTeachers] = useState([]);
   const [loadingTeachers, setLoadingTeachers] = useState(false);
 
   useEffect(() => {
     setLoadingTeachers(true);
-    PostRequest("/teacher/headmasters").then(({ data }) => {
+    PostRequest("/teacher/").then(({ data }) => {
       setLoadingTeachers(false);
       setTeachers(data);
     });
@@ -27,7 +27,7 @@ export default function Teachers() {
       <Spinner props={{ isLoading: loadingTeachers }} />
 
       <section className="latest max-w-7xl mx-auto mt-20">
-        {user && (
+        {auth.user && (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Link to={"/teachers/create"}>
               <button
@@ -40,6 +40,8 @@ export default function Teachers() {
           </div>
         )}
 
+        <h1 className="text-5xl text-center mt-20">Οι εκπαιδευτικοί μας</h1>
+
         <div className="items-center flex flex-wrap">
           {!loadingTeachers &&
             teachers.map((teacher) => (
@@ -47,6 +49,9 @@ export default function Teachers() {
                 name={teacher.name}
                 specialty={teacher.specialty}
                 gender={teacher.gender}
+                headmaster={teacher.headmaster}
+                subheadmaster={teacher.subheadmaster}
+                teacher_id={teacher.teacher_id}
               />
             ))}
         </div>

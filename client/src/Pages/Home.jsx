@@ -115,6 +115,9 @@ export default function Home() {
                 name={teacher.name}
                 specialty={teacher.specialty}
                 gender={teacher.gender}
+                headmaster={teacher.headmaster}
+                subheadmaster={teacher.subheadmaster}
+                teacher_id={teacher.teacher_id}
               />
             ))}
         </div>

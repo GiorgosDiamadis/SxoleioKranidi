@@ -8,10 +8,12 @@ const {
   deleteTeacher,
   updateTeacher,
   getHeadmasters,
+  getTeacher,
 } = require("../Controllers/teacher");
 const { saveValidation } = require("../Middleware/validateTeacher");
 
 router.route("/").post(getTeachers);
+router.route("/get").post(getTeacher);
 router.route("/headmasters").post(getHeadmasters);
 router.route("/create").post(isAuthenticated, saveValidation, saveTeacher);
 router.route("/delete").post(isAuthenticated, deleteTeacher);

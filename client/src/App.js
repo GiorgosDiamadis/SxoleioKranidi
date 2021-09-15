@@ -17,6 +17,7 @@ import UpdatePost from "./Pages/UpdatePost";
 import NotFound from "./Pages/NotFound";
 import CreateTeacher from "./Pages/CreateTeacher";
 import Teachers from "./Pages/Teachers";
+import UpdateTeacher from "./Pages/UpdateTeacher";
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
           <ProtectedRoute
             exact
             path={"/teachers/update/:teacher_id"}
-            component={UpdatePost}
+            component={UpdateTeacher}
           />
 
           <Route exact path={"/contact"}>
