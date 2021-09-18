@@ -1,35 +1,34 @@
-version: '2'
+version: "2"
 services:
-  web:
-    build: ./Server
-    command: npm start
-    volumes:
-      - ./Server:/usr/app/server
-      - /usr/app/server/node_modules
-    ports:
-      - "8080:8080"
+  # web:
+  #   build: ./Server
+  #   command: npm start
+  #   volumes:
+  #     - ./Server:/usr/app/server
+  #     - /usr/app/server/node_modules
+  #   ports:
+  #     - "8080:8080"
   client:
     build: ./client
-    command: npm start
+    # command: npm start
     volumes:
       - ./client:/usr/app/client
       - /usr/app/client/node_modules
     ports:
       - "3000:3000"
-  database:
-    image: mariadb
-    restart: always
-    container_name: db_container
-    volumes:
-      - db-data:/var/lib/mysql/
-    environment:
-      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
-      MARIADB_USER: ${DB_USERNAME}
-      MARIADB_DATABASE: ${DB_DATABASE}
-      MARIADB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3306:3306"
+  # database:
+  #   image: mariadb
+  #   restart: always
+  #   container_name: db_container
+  #   volumes:
+  #     - db-data:/var/lib/mysql/
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+  #     MARIADB_USER: ${DB_USERNAME}
+  #     MARIADB_DATABASE: ${DB_DATABASE}
+  #     MARIADB_PASSWORD: ${DB_PASSWORD}
+  #   ports:
+  #     - "3306:3306"
 
 volumes:
   db-data:
-
