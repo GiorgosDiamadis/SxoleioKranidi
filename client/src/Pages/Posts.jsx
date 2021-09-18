@@ -72,6 +72,7 @@ export default function Posts() {
     setIsLoading(true);
     PostRequest("/posts")
       .then(({ data }) => {
+        console.log(data)
         data = data.sort(function (a, b) {
           return a.publishedAt < b.publishedAt
             ? 0
@@ -114,7 +115,7 @@ export default function Posts() {
       <section className="latest max-w-7xl mx-auto mt-20">
         {user && (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Link to={"/posts/create"}>
+            <Link to={"createPost"}>
               <button
                 data-aos={"zoom-in"}
                 className="h-10 mr-3 px-5 text-gray-500 transition-colors duration-150 border border-blue-400 rounded-lg focus:shadow-outline hover:bg-blue-400 hover:text-gray-100"

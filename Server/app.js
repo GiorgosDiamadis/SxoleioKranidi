@@ -31,8 +31,9 @@ const {
     saveValidation: savePostValidation,
 } = require("./Middleware/validatePost");
 const isAuthenticated = require("./Middleware/isAuthenticated");
-const {sendEmail} = require("./Controllers/mail");
+const {sendEmail, notifySubscribers} = require("./Controllers/mail");
 const {validateEmail} = require("./Middleware/validateEmail");
+const {validateSubscription} = require("./Middleware/ValidateSubscription");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -60,9 +61,13 @@ app.post("/posts/create", isAuthenticated, savePostValidation, savePost);
 app.post("/posts/delete", isAuthenticated, deletePost);
 app.post("/posts/update", isAuthenticated, savePostValidation, updatePost);
 app.post("/email/send", validateEmail, sendEmail);
-app.post("/subscribe", addSubscription)
+app.post("/subscribe", validateSubscription, addSubscription)
 app.use("/teacher", teacherRoutes);
+
 
 app.listen(PORT, () => {
     console.log(`Serving on port ${PORT}`);
 });
+
+
+

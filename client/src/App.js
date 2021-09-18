@@ -37,12 +37,13 @@ function App() {
           <Route exact path={"/posts/:post_id"}>
             <Post />
           </Route>
-          <ProtectedRoute exact path={"/posts/create"} component={CreatePost} />
+          <ProtectedRoute exact path={"/createPost"} component={CreatePost} />
           <ProtectedRoute
             exact
             path={"/posts/update/:post_id"}
             component={UpdatePost}
           />
+
 
           <Route exact path={"/teachers"}>
             <Teachers />

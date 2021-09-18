@@ -60,12 +60,20 @@ export default function UpdatePost() {
 
         try {
             setIsLoading(true);
+            let auth = localStorage.getItem("auth");
+            let token = null;
+            if (auth) {
+                token = auth.split(" ")[1];
+            }
+
             const res = await axios.post(
                 `/posts/update`,
                 formData,
                 {
+                    withCredentials: true,
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "authorization": `Bearer ${token}`
                     },
                 }
             );

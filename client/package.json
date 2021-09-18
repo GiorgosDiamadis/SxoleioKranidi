@@ -23,7 +23,7 @@
     "react-transition-group": "^4.4.2",
     "web-vitals": "^1.1.2"
   },
-  "proxy": "http://web:8080",
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "craco start",
     "build": "craco build",

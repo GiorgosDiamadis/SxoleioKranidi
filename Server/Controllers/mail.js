@@ -2,6 +2,8 @@ const catchAsync = require("../Utils/catchAsync")
 const nodemailer = require("nodemailer");
 const mailgun = require("nodemailer-mailgun-transport")
 const {validationResult} = require("express-validator");
+const Subscription = require("../Models/subscription");
+const {log} = require("nodemon/lib/utils");
 
 let auth = {
     auth: {
@@ -34,5 +36,6 @@ module.exports.sendEmail = catchAsync(async (req, res) => {
             res.send(data)
         }
     })
+
 
 })

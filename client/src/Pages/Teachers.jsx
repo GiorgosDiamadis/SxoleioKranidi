@@ -41,7 +41,7 @@ export default function Teachers() {
                     </div>
                 )}
 
-                <h1 className="text-5xl text-center mt-5">Οι εκπαιδευτικοί μας</h1>
+                <h1 className="text-5xl text-center mt-5" data-aos={"zoom-in"}>Οι εκπαιδευτικοί μας</h1>
 
                 <div className="items-center flex flex-wrap">
                     <div

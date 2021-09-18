@@ -19,7 +19,6 @@ module.exports.getPosts = catchAsync(async (req, res, next) => {
 });
 module.exports.getPost = catchAsync(async (req, res, next) => {
     const {post_id} = req.body;
-
     let post = await Post.get(post_id);
 
     res.status(200).send(post);

@@ -9,6 +9,7 @@ module.exports = catchAsync(async (req, res, next) => {
     res.status(400).end();
     return;
   }
+
   try {
     req.body.token = jwt.verify(auth.split(" ")[1], config.JWT_SECRET);
   } catch (error) {
