@@ -20,7 +20,8 @@ export default function TeacherLine({
             <Spinner props={{isLoading}}/>
             <tr>
                 <td>
-                    <img className={"inline-block w-10 h-10 mr-5"} src={`${gender === "male" ? "/male.png" : "/female.png"} `} alt=""/>
+                    <img className={"inline-block w-10 h-10 mr-5"}
+                         src={`${gender === "male" ? "/male.png" : "/female.png"} `} alt=""/>
 
                     {name}
 

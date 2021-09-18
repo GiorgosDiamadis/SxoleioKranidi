@@ -94,10 +94,10 @@ module.exports.updatePost = catchAsync(async (req, res, next) => {
 
     if (req.files !== null) {
 
-        try{
+        try {
             await cloudinary.uploader.destroy(public_id);
 
-        }catch (e){
+        } catch (e) {
 
         }
 
