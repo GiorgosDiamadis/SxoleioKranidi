@@ -4,6 +4,47 @@ h3 {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
 }
 
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin-top: 5px;
+        border: 1px solid #ccc;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        text-align: center;
+        padding-left: 50%;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+}
+
 table {
     border-collapse: collapse;
     /*margin: 25px auto;*/
@@ -21,7 +62,7 @@ th, td {
     border-collapse: collapse;
 }
 
-tr:hover{
+tr:hover {
     background-color: rgba(96, 165, 250, 0.29);
 }
 
@@ -65,6 +106,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #f7f7f7;
 }
 
 h1 {

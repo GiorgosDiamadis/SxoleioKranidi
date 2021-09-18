@@ -47,6 +47,7 @@ export default function Teachers() {
                     <div
                         data-aos={"zoom-in"}
                         className="container mx-auto max-w-5xl rounded-lg overflow-hidden my-2 bg-white"
+                        style={{backgroundColor: "#f7f7f7"}}
                     >
                         <table className="w-full">
                             <thead>
