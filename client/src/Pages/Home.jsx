@@ -9,7 +9,7 @@ import PostRequest from "../PostRequest";
 import { useHistory } from "react-router";
 import { Toast } from "primereact/toast";
 import Spinner from "../Components/Spinner";
-import Teacher from "../Components/Teacher";
+import TeacherImage from "../Components/TeacherImage";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
@@ -111,7 +111,7 @@ export default function Home() {
         <div className="items-center flex flex-wrap">
           {!loadingTeachers &&
             teachers.map((teacher) => (
-              <Teacher
+              <TeacherImage
                 name={teacher.name}
                 specialty={teacher.specialty}
                 gender={teacher.gender}

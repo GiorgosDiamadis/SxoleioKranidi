@@ -4,7 +4,7 @@ import PostRequest from "../PostRequest";
 import { AuthContext } from "../useAuth";
 import Spinner from "./Spinner";
 
-export default function Teacher({
+export default function TeacherImage({
   name,
   specialty,
   gender,
@@ -55,7 +55,7 @@ export default function Teacher({
 
       <div className="relative mb-6">
         <img
-          className="w-full"
+          className="w-full w-18 h-42"
           src={`${gender === "male" ? "/male.png" : "/female.png"} `}
           alt="Profile picture"
         />
