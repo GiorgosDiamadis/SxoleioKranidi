@@ -46,6 +46,13 @@ module.exports.savePost = catchAsync(async (req, res, next) => {
             width: 600,
             crop: "scale",
         });
+
+        tmp1 = imgURL.substr(14)
+        tmp2 = imgURL.substr(0,14)
+        tmp2 += "s"
+
+        imgURL = tmp2 + tmp1;
+
         imgURL = [imgURL.slice(0, 4), " class='rounded-xl'", imgURL.slice(4)].join(
             ""
         );
@@ -112,6 +119,13 @@ module.exports.updatePost = catchAsync(async (req, res, next) => {
             width: 600,
             crop: "scale",
         });
+        
+        tmp1 = imgURL.substr(14)
+        tmp2 = imgURL.substr(0,14)
+        tmp2 += "s"
+
+        imgURL = tmp2 + tmp1;
+
         imgURL = [imgURL.slice(0, 4), " class='rounded-xl'", imgURL.slice(4)].join(
             ""
         );

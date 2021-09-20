@@ -124,9 +124,11 @@ class Post {
         .then((data) => {
           conn.release();
           resolve(data.insertId);
+  
         })
-        .catch(() => {
+        .catch((reason) => {
           conn.release();
+          console.log(reason);
           reject();
         });
     });
